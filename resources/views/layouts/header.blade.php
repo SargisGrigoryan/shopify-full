@@ -9,16 +9,10 @@
       <div class="collapse navbar-collapse" id="navbarCollapse">
         <ul class="navbar-nav ms-auto">
           <li class="nav-item">
+            <a class="nav-link" href="/">Home</a>
+          </li>
+          <li class="nav-item">
             <a class="nav-link" href="/details">Details</a>
-          </li>
-          <li class="nav-item">
-            <a class="nav-link" href="/register">Sign up</a>
-          </li>
-          <li class="nav-item">
-            <a class="nav-link" href="/login">Sign in</a>
-          </li>
-          <li class="nav-item">
-            <a class="nav-link" href="/profile">My profile</a>
           </li>
           <li class="nav-item">
             <a class="nav-link" href="/about#faq">FAQ</a>
@@ -26,9 +20,18 @@
           <li class="nav-item">
             <a class="nav-link" href="/about">About</a>
           </li>
-          <li class="nav-item">
-            <a class="nav-link" href="/">Home</a>
-          </li>
+          @if (!session()->get('user'))
+            <li class="nav-item">
+              <a class="nav-link" href="/login">Sign in</a>
+            </li>
+          @else
+            <li class="nav-item">
+              <a class="nav-link" href="/profile">My profile</a>
+            </li>
+            <li class="nav-item">
+              <a class="nav-link" href="/logout">Logout</a>
+            </li>
+          @endif
         </ul>
       </div>
     </div>

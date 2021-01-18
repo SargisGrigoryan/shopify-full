@@ -1,6 +1,10 @@
 <?php
 
+// Use default
 use Illuminate\Support\Facades\Route;
+
+// Use controllers
+use App\Http\Controllers\UserController;
 
 /*
 |--------------------------------------------------------------------------
@@ -13,9 +17,32 @@ use Illuminate\Support\Facades\Route;
 |
 */
 
+
+// Global views
 Route::view('/', 'home');
+Route::view('/home', 'home');
 Route::view('details', 'details');
-Route::view('login', 'login');
-Route::view('register', 'register');
-Route::view('profile', 'profile');
 Route::view('about', 'about');
+
+// __USER LOGINED__
+Route::group(['middleware' => ['UserLoggined']], function(){
+
+    // VIEW
+    Route::view('login', 'login');
+    Route::view('register', 'register');
+
+    // POST
+    Route::post('/login', [UserController::class, 'login']);
+
+});
+
+// __USER NOT LOGINED__
+Route::group(['middleware' => ['UserNotLoggined']], function(){
+
+    // VIEW
+    Route::view('profile', 'profile');
+
+    // GET
+    Route::get('logout', [UserController::class, 'logout']);
+
+});

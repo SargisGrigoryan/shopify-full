@@ -1,3 +1,16 @@
+<?php
+
+// Use controllers
+use App\Http\Controllers\UserController;
+
+// Check user cookies(remember user)
+if(Cookie::get('remember_user')){
+  $id = Cookie::get('remember_user');
+  UserController::rememberUser($id);
+}
+
+?>
+
 <!doctype html>
 <html lang="en">
   <head>
