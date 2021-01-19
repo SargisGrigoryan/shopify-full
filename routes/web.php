@@ -33,16 +33,15 @@ Route::group(['middleware' => ['UserLoggined']], function(){
 
     // POST
     Route::post('/login', [UserController::class, 'login']);
+    Route::post('/register', [UserController::class, 'register']);
 
 });
 
 // __USER NOT LOGINED__
 Route::group(['middleware' => ['UserNotLoggined']], function(){
 
-    // VIEW
-    Route::view('profile', 'profile');
-
     // GET
     Route::get('logout', [UserController::class, 'logout']);
+    Route::get('profile', [UserController::class, 'profile']);
 
 });
