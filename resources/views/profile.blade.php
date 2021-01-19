@@ -8,14 +8,7 @@
             <div class="row align-items-center">
                 <div class="col-md-6">
                     <div class="profile-img">
-                        <?php
-                            if(!$userData->img){
-                                $img = 'img/users/no_user_img.jpg';
-                            }else {
-                                $img = $userData->img;
-                            }
-                        ?>
-                        <img src="{{ $img }}" alt="Profile image" class="img-resp">
+                        <img src="{{ $userData->img }}" alt="Profile image">
                     </div>
                 </div>
                 <div class="col-md-6 mt-3">
@@ -28,7 +21,7 @@
                         <li><a href="#">Orders (3)</a></li>
                         <li><a href="#">Wishlist (5)</a></li>
                     </ul>
-                    <button type="button" class="bttn bttn-dark">Settings</button>
+                    <a href="/userSettings" class="bttn bttn-dark">Settings</a>
                 </div>
             </div>
         </div>

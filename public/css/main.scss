@@ -382,6 +382,9 @@ section#my-profile .profile-img{
     overflow: hidden;
     margin: 0 auto;
 }
+section#my-profile .profile-img img{
+    height: 100%;
+}
 section#my-profile ul{
     list-style: none;
     padding: 0;

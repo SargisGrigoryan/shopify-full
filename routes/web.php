@@ -43,5 +43,9 @@ Route::group(['middleware' => ['UserNotLoggined']], function(){
     // GET
     Route::get('logout', [UserController::class, 'logout']);
     Route::get('profile', [UserController::class, 'profile']);
+    Route::get('userSettings', [UserController::class, 'userSettings']);
+
+    // POST
+    Route::post('saveUserDatas', [UserController::class, 'saveUserDatas']);
 
 });
