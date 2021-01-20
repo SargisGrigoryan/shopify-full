@@ -2,54 +2,55 @@
 
 @section('content')
 
-    <!-- Details -->
-    <section id="details" class="padding_center_1">
-        <div class="container">
-            <div class="row">
-                <div class="col-md-6">
-                    <div class="details-image-side">
-                        <img src="img/products/product_2.png" alt="Details image" class="img-resp details-general-image">
-                        <ul>
-                            <li><img src="img/products/product_2.png" alt="Details image" class="img-resp details-secondary-image"></li>
-                            <li><img src="img/products/product_1.png" alt="Details image" class="img-resp details-secondary-image"></li>
-                            <li><img src="img/products/product_3.png" alt="Details image" class="img-resp details-secondary-image"></li>
-                            <li><img src="img/products/product_4.png" alt="Details image" class="img-resp details-secondary-image"></li>
-                        </ul>
-                    </div>
-                </div>
-                <div class="col-md-6 mt-3">
-                    <div class="font_size_4">Product name</div>
-                    <div>In stock</div>
-                    <div class="font_size_7"><del>$99</del> $60</div>
-                    <div class="font_size_11">
-                        Lorem Ipsum is simply dummy text of the printing and typesetting industry. 
-                        Lorem Ipsum has been the industry's standard dummy text ever since the 1500s, 
-                        when an unknown printer took a galley of type and scrambled it to make a type 
-                        specimen book. It has survived not only five centuries, but also the leap into 
-                        electronic typesetting, remaining essentially unchanged. It was popularised in 
-                        the 1960s with the release of Letraset sheets containing Lorem Ipsum passages, 
-                        and more recently with desktop publishing software like Aldus PageMaker including 
-                        versions of Lorem Ipsum.
-                    </div>
-                    <ul>
-                        <li>Lorem Ipsum</li>
-                        <li>Dolor sit amet</li>
-                        <li>Consectetur adipiscing elit</li>
-                        <li>Donec in dolor sed</li>
-                    </ul>
-                    <div>
-                        Quantity - <input type="number" name="qty" class="custom-input">
-                    </div>
-                    <div>
-                        <button type="button" class="bttn bttn-dark">Buy now</button>
-                        <button type="button" class="bttn bttn-dark" data-bs-toggle="tooltip" data-bs-placement="top" title="Add to cart"><i class="fas fa-shopping-basket"></i></button>
-                        <button type="button" class="bttn bttn-dark" data-bs-toggle="tooltip" data-bs-placement="top" title="Add to wishlist"><i class="far fa-heart"></i></button>
-                    </div>
-                </div>
-            </div>
-        </div>
-    </section>
-    <!-- Details end -->
+      <!-- Details -->
+      <section id="details" class="padding_center_1">
+          <div class="container">
+              <div class="row">
+                  <div class="col-md-6">
+                      <div class="details-image-side">
+                          <img src="{{ $details->img }}" alt="Details image" class="img-resp details-general-image">
+                          <ul>
+                              <li><img src="{{ $details->img }}" alt="Details image" class="img-resp details-secondary-image"></li>
+                              <li><img src="/img/products/product_1.png" alt="Details image" class="img-resp details-secondary-image"></li>
+                              <li><img src="/img/products/product_3.png" alt="Details image" class="img-resp details-secondary-image"></li>
+                              <li><img src="/img/products/product_4.png" alt="Details image" class="img-resp details-secondary-image"></li>
+                          </ul>
+                      </div>
+                  </div>
+                  <div class="col-md-6 mt-3">
+                      <div class="font_size_4">{{ $details->name_en }}</div>
+                      <div>{{ $details->in_stock>0?'In stock':'Not in stock' }}</div>
+                      <?php
+                        $price_show = "$".$details->price;
+                        if($details->discount != 0){
+                          $discounted_price = $details->price - ($details->price * $details->discount / 100);
+                          $price_show = "<del>$".$details->price."</del> $".$discounted_price;
+                        }
+                        $details->price;
+                      ?>
+                      <div class="font_size_7"><?=$price_show?></div>
+                      <div class="font_size_11">{{ $details->descr_en }}</div>
+                      <ul>
+                          <?php
+                            $options_array = explode(", ", $details->options_en);
+                          ?>
+                          @foreach ($options_array as $option)
+                              <li>{{ $option }}</li>
+                          @endforeach
+                      </ul>
+                      <div>
+                          Quantity - <input type="number" name="qty" class="custom-input">
+                      </div>
+                      <div>
+                          <button type="button" class="bttn bttn-dark">Buy now</button>
+                          <button type="button" class="bttn bttn-dark" data-bs-toggle="tooltip" data-bs-placement="top" title="Add to cart"><i class="fas fa-shopping-basket"></i></button>
+                          <button type="button" class="bttn bttn-dark" data-bs-toggle="tooltip" data-bs-placement="top" title="Add to wishlist"><i class="far fa-heart"></i></button>
+                      </div>
+                  </div>
+              </div>
+          </div>
+      </section>
+      <!-- Details end -->
 
 
     <!-- Coments -->
@@ -89,7 +90,7 @@
                     <div class="col-12 d-flex justify-content-md-start justify-content-center">
                         <div class="comment-bg">
                             <div class="user-img">
-                                <img src="img/users/user_img.jpg" alt="User image" class="img-resp">
+                                <img src="/img/users/user_img.jpg" alt="User image" class="img-resp">
                             </div>
                             <div class="user-comment">
                                 <div class="font_size_9"><b>User name</b></div>
@@ -119,7 +120,7 @@
                                 <div class="mt-2 font_size_13 color_5">15.01.2021</div>
                             </div>
                             <div class="user-img">
-                                <img src="img/users/user_img.jpg" alt="User image" class="img-resp">
+                                <img src="/img/users/user_img.jpg" alt="User image" class="img-resp">
                             </div>
                         </div>
                     </div>
@@ -165,7 +166,7 @@
                 <!-- Similar product -->
                 <div class="product carousel-product">
                   <span class="discounted">Discounted</span>
-                  <a href="#"><img src="img/products/product_1.png" alt="Product image"></a>
+                  <a href="#"><img src="/img/products/product_1.png" alt="Product image"></a>
                   <ul>
                     <li><button type="button" class="bttn bttn-product"><i class="far fa-heart"></i></button></li>
                     <li><button type="button" class="bttn bttn-product"><i class="fas fa-shopping-basket"></i></button></li>
@@ -177,7 +178,7 @@
                 <!-- Similar product -->
                 <div class="product carousel-product">
                   <span class="discounted">Discounted</span>
-                  <a href="#"><img src="img/products/product_2.png" alt="Product image"></a>
+                  <a href="#"><img src="/img/products/product_2.png" alt="Product image"></a>
                   <ul>
                     <li><button type="button" class="bttn bttn-product"><i class="far fa-heart"></i></button></li>
                     <li><button type="button" class="bttn bttn-product"><i class="fas fa-shopping-basket"></i></button></li>
@@ -189,7 +190,7 @@
                 <!-- Similar product -->
                 <div class="product carousel-product">
                   <span class="discounted">Discounted</span>
-                  <a href="#"><img src="img/products/product_3.png" alt="Product image"></a>
+                  <a href="#"><img src="/img/products/product_3.png" alt="Product image"></a>
                   <ul>
                     <li><button type="button" class="bttn bttn-product"><i class="far fa-heart"></i></button></li>
                     <li><button type="button" class="bttn bttn-product"><i class="fas fa-shopping-basket"></i></button></li>
@@ -201,7 +202,7 @@
                 <!-- Similar product -->
                 <div class="product carousel-product">
                   <span class="discounted">Discounted</span>
-                  <a href="#"><img src="img/products/product_4.png" alt="Product image"></a>
+                  <a href="#"><img src="/img/products/product_4.png" alt="Product image"></a>
                   <ul>
                     <li><button type="button" class="bttn bttn-product"><i class="far fa-heart"></i></button></li>
                     <li><button type="button" class="bttn bttn-product"><i class="fas fa-shopping-basket"></i></button></li>
@@ -213,7 +214,7 @@
                 <!-- Similar product -->
                 <div class="product carousel-product">
                   <span class="discounted">Discounted</span>
-                  <a href="#"><img src="img/products/product_5.png" alt="Product image"></a>
+                  <a href="#"><img src="/img/products/product_5.png" alt="Product image"></a>
                   <ul>
                     <li><button type="button" class="bttn bttn-product"><i class="far fa-heart"></i></button></li>
                     <li><button type="button" class="bttn bttn-product"><i class="fas fa-shopping-basket"></i></button></li>

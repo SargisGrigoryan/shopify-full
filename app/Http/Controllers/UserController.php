@@ -11,6 +11,7 @@ use File;
 
 // Use models
 use App\Models\User;
+use App\Models\Product;
 
 class UserController extends Controller
 {
@@ -130,7 +131,7 @@ class UserController extends Controller
     }
 
     // Save user settings
-    function saveUserDatas(Request $req){
+    function saveUserDatas (Request $req){
         // Check all required fileds
         if(!$req->first_name){
             return "First name is required.";
@@ -194,6 +195,24 @@ class UserController extends Controller
             return "Your data was successfully updated.";
         }else{
             return "Connection error, please try again later.";
+        }
+    }
+
+    // Get home page products from db
+    function getHomePage (){
+        $all_products = Product::where('status', '1')->get();
+
+        return view('home', ['all_product' => $all_products]);
+    }
+
+    // Get product details
+    function getDetails ($id){
+        $product = Product::where('status', '1')->find($id);
+
+        if($product){
+            return view('details', ['details' => $product]);
+        }else{
+            return "Sorry but this product is not available now.";
         }
     }
 }

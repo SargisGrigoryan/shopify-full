@@ -5,6 +5,7 @@ use Illuminate\Support\Facades\Route;
 
 // Use controllers
 use App\Http\Controllers\UserController;
+use App\Http\Controllers\AdminController;
 
 /*
 |--------------------------------------------------------------------------
@@ -18,11 +19,23 @@ use App\Http\Controllers\UserController;
 */
 
 
-// Global views
-Route::view('/', 'home');
-Route::view('/home', 'home');
-Route::view('details', 'details');
+// VIEW
 Route::view('about', 'about');
+
+// GET
+Route::get('/', [UserController::class, 'getHomePage']);
+Route::get('/home', [UserController::class, 'getHomePage']);
+Route::get('/details/{id}', [UserController::class, 'getDetails']);
+
+
+// __ADMIN__
+
+// VIEW
+Route::view('addProduct', 'addProduct');
+
+// POST
+Route::post('addProduct', [AdminController::class, 'addProduct']);
+
 
 // __USER LOGINED__
 Route::group(['middleware' => ['UserLoggined']], function(){
@@ -36,6 +49,7 @@ Route::group(['middleware' => ['UserLoggined']], function(){
     Route::post('/register', [UserController::class, 'register']);
 
 });
+
 
 // __USER NOT LOGINED__
 Route::group(['middleware' => ['UserNotLoggined']], function(){

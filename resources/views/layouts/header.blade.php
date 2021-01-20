@@ -8,6 +8,12 @@
       </button>
       <div class="collapse navbar-collapse" id="navbarCollapse">
         <ul class="navbar-nav ms-auto">
+          <li class="nav-item dropdown">
+            <a class="nav-link dropdown-toggle" href="#" id="dropdown01" data-bs-toggle="dropdown" aria-expanded="false">Admin</a>
+            <ul class="dropdown-menu" aria-labelledby="dropdown01">
+              <li><a class="dropdown-item" href="/addProduct">Add product</a></li>
+            </ul>
+          </li>
           <li class="nav-item">
             <a class="nav-link" href="/">Home</a>
           </li>

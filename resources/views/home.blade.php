@@ -238,186 +238,33 @@
     <div class="content">
       <div class="container">
         <div class="row padding_center_1">
-        
-          <!-- Product -->
-          <div class="col-xl-3 col-lg-4 col-md-6 col-12">
-            <div class="product common-product">
-              <span class="discounted">Discounted</span>
-              <div class="stock">In stock</div>
-              <a href="#"><img src="img/products/product_1.png" alt="Product image"></a>
-              <ul>
-                <li><button type="button" class="bttn bttn-product"><i class="far fa-heart"></i></button></li>
-                <li><button type="button" class="bttn bttn-product"><i class="fas fa-shopping-basket"></i></button></li>
-                <li><a href="#" class="product-name"><b>Product name</b></a><div><del>$99</del> $60</div></li>
-              </ul>
+
+          @foreach ($all_product as $product)
+            <!-- Product -->
+            <div class="col-xl-3 col-lg-4 col-md-6 col-12">
+              <div class="product common-product">
+                @if ($product->discount != 0)
+                  <span class="discounted">Discounted</span>
+                @endif
+                <div class="stock">{{ $product->in_stock!=0?'In stock':'Not in stock' }}</div>
+                <a href="/details/{{ $product->id }}"><img src="{{ $product->img }}" alt="Product image"></a>
+                <ul>
+                  <li><button type="button" class="bttn bttn-product"><i class="far fa-heart"></i></button></li>
+                  <li><button type="button" class="bttn bttn-product"><i class="fas fa-shopping-basket"></i></button></li>
+                  <?php
+                    $price_show = "$".$product->price;
+                    if($product->discount != 0){
+                      $discounted_price = $product->price - ($product->price * $product->discount / 100);
+                      $price_show = "<del>$".$product->price."</del> $".$discounted_price;
+                    }
+                    $product->price;
+                  ?>
+                  <li><a href="#" class="product-name"><b>{{ $product->name_en }}</b></a><div><?=$price_show?></div></li>
+                </ul>
+              </div>
             </div>
-          </div>
-          <!-- Product end -->
-        
-          <!-- Product -->
-          <div class="col-xl-3 col-lg-4 col-md-6 col-12">
-            <div class="product common-product">
-              <span class="discounted">Discounted</span>
-              <div class="stock">In stock</div>
-              <a href="#"><img src="img/products/product_1.png" alt="Product image"></a>
-              <ul>
-                <li><button type="button" class="bttn bttn-product"><i class="far fa-heart"></i></button></li>
-                <li><button type="button" class="bttn bttn-product"><i class="fas fa-shopping-basket"></i></button></li>
-                <li><a href="#" class="product-name"><b>Product name</b></a><div><del>$99</del> $60</div></li>
-              </ul>
-            </div>
-          </div>
-          <!-- Product end -->
-        
-          <!-- Product -->
-          <div class="col-xl-3 col-lg-4 col-md-6 col-12">
-            <div class="product common-product">
-              <span class="discounted">Discounted</span>
-              <div class="stock">In stock</div>
-              <a href="#"><img src="img/products/product_1.png" alt="Product image"></a>
-              <ul>
-                <li><button type="button" class="bttn bttn-product"><i class="far fa-heart"></i></button></li>
-                <li><button type="button" class="bttn bttn-product"><i class="fas fa-shopping-basket"></i></button></li>
-                <li><a href="#" class="product-name"><b>Product name</b></a><div><del>$99</del> $60</div></li>
-              </ul>
-            </div>
-          </div>
-          <!-- Product end -->
-        
-          <!-- Product -->
-          <div class="col-xl-3 col-lg-4 col-md-6 col-12">
-            <div class="product common-product">
-              <span class="discounted">Discounted</span>
-              <div class="stock">In stock</div>
-              <a href="#"><img src="img/products/product_1.png" alt="Product image"></a>
-              <ul>
-                <li><button type="button" class="bttn bttn-product"><i class="far fa-heart"></i></button></li>
-                <li><button type="button" class="bttn bttn-product"><i class="fas fa-shopping-basket"></i></button></li>
-                <li><a href="#" class="product-name"><b>Product name</b></a><div><del>$99</del> $60</div></li>
-              </ul>
-            </div>
-          </div>
-          <!-- Product end -->
-        
-          <!-- Product -->
-          <div class="col-xl-3 col-lg-4 col-md-6 col-12">
-            <div class="product common-product">
-              <span class="discounted">Discounted</span>
-              <div class="stock">In stock</div>
-              <a href="#"><img src="img/products/product_1.png" alt="Product image"></a>
-              <ul>
-                <li><button type="button" class="bttn bttn-product"><i class="far fa-heart"></i></button></li>
-                <li><button type="button" class="bttn bttn-product"><i class="fas fa-shopping-basket"></i></button></li>
-                <li><a href="#" class="product-name"><b>Product name</b></a><div><del>$99</del> $60</div></li>
-              </ul>
-            </div>
-          </div>
-          <!-- Product end -->
-        
-          <!-- Product -->
-          <div class="col-xl-3 col-lg-4 col-md-6 col-12">
-            <div class="product common-product">
-              <span class="discounted">Discounted</span>
-              <div class="stock">In stock</div>
-              <a href="#"><img src="img/products/product_1.png" alt="Product image"></a>
-              <ul>
-                <li><button type="button" class="bttn bttn-product"><i class="far fa-heart"></i></button></li>
-                <li><button type="button" class="bttn bttn-product"><i class="fas fa-shopping-basket"></i></button></li>
-                <li><a href="#" class="product-name"><b>Product name</b></a><div><del>$99</del> $60</div></li>
-              </ul>
-            </div>
-          </div>
-          <!-- Product end -->
-        
-          <!-- Product -->
-          <div class="col-xl-3 col-lg-4 col-md-6 col-12">
-            <div class="product common-product">
-              <span class="discounted">Discounted</span>
-              <div class="stock">In stock</div>
-              <a href="#"><img src="img/products/product_1.png" alt="Product image"></a>
-              <ul>
-                <li><button type="button" class="bttn bttn-product"><i class="far fa-heart"></i></button></li>
-                <li><button type="button" class="bttn bttn-product"><i class="fas fa-shopping-basket"></i></button></li>
-                <li><a href="#" class="product-name"><b>Product name</b></a><div><del>$99</del> $60</div></li>
-              </ul>
-            </div>
-          </div>
-          <!-- Product end -->
-        
-          <!-- Product -->
-          <div class="col-xl-3 col-lg-4 col-md-6 col-12">
-            <div class="product common-product">
-              <span class="discounted">Discounted</span>
-              <div class="stock">In stock</div>
-              <a href="#"><img src="img/products/product_1.png" alt="Product image"></a>
-              <ul>
-                <li><button type="button" class="bttn bttn-product"><i class="far fa-heart"></i></button></li>
-                <li><button type="button" class="bttn bttn-product"><i class="fas fa-shopping-basket"></i></button></li>
-                <li><a href="#" class="product-name"><b>Product name</b></a><div><del>$99</del> $60</div></li>
-              </ul>
-            </div>
-          </div>
-          <!-- Product end -->
-        
-          <!-- Product -->
-          <div class="col-xl-3 col-lg-4 col-md-6 col-12">
-            <div class="product common-product">
-              <span class="discounted">Discounted</span>
-              <div class="stock">In stock</div>
-              <a href="#"><img src="img/products/product_1.png" alt="Product image"></a>
-              <ul>
-                <li><button type="button" class="bttn bttn-product"><i class="far fa-heart"></i></button></li>
-                <li><button type="button" class="bttn bttn-product"><i class="fas fa-shopping-basket"></i></button></li>
-                <li><a href="#" class="product-name"><b>Product name</b></a><div><del>$99</del> $60</div></li>
-              </ul>
-            </div>
-          </div>
-          <!-- Product end -->
-        
-          <!-- Product -->
-          <div class="col-xl-3 col-lg-4 col-md-6 col-12">
-            <div class="product common-product">
-              <span class="discounted">Discounted</span>
-              <div class="stock">In stock</div>
-              <a href="#"><img src="img/products/product_1.png" alt="Product image"></a>
-              <ul>
-                <li><button type="button" class="bttn bttn-product"><i class="far fa-heart"></i></button></li>
-                <li><button type="button" class="bttn bttn-product"><i class="fas fa-shopping-basket"></i></button></li>
-                <li><a href="#" class="product-name"><b>Product name</b></a><div><del>$99</del> $60</div></li>
-              </ul>
-            </div>
-          </div>
-          <!-- Product end -->
-        
-          <!-- Product -->
-          <div class="col-xl-3 col-lg-4 col-md-6 col-12">
-            <div class="product common-product">
-              <span class="discounted">Discounted</span>
-              <div class="stock">In stock</div>
-              <a href="#"><img src="img/products/product_1.png" alt="Product image"></a>
-              <ul>
-                <li><button type="button" class="bttn bttn-product"><i class="far fa-heart"></i></button></li>
-                <li><button type="button" class="bttn bttn-product"><i class="fas fa-shopping-basket"></i></button></li>
-                <li><a href="#" class="product-name"><b>Product name</b></a><div><del>$99</del> $60</div></li>
-              </ul>
-            </div>
-          </div>
-          <!-- Product end -->
-        
-          <!-- Product -->
-          <div class="col-xl-3 col-lg-4 col-md-6 col-12">
-            <div class="product common-product">
-              <span class="discounted">Discounted</span>
-              <div class="stock">In stock</div>
-              <a href="#"><img src="img/products/product_1.png" alt="Product image"></a>
-              <ul>
-                <li><button type="button" class="bttn bttn-product"><i class="far fa-heart"></i></button></li>
-                <li><button type="button" class="bttn bttn-product"><i class="fas fa-shopping-basket"></i></button></li>
-                <li><a href="#" class="product-name"><b>Product name</b></a><div><del>$99</del> $60</div></li>
-              </ul>
-            </div>
-          </div>
-          <!-- Product end -->
+            <!-- Product end -->
+          @endforeach
         
         </div>
         <div class="row">
