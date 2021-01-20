@@ -35,6 +35,10 @@ Route::view('addProduct', 'addProduct');
 
 // POST
 Route::post('addProduct', [AdminController::class, 'addProduct']);
+Route::post('saveProduct', [AdminController::class, 'saveProduct']);
+
+// GET
+Route::get('editProduct/{id}', [AdminController::class, 'editProduct']);
 
 
 // __USER LOGINED__

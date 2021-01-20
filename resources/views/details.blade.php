@@ -46,6 +46,9 @@
                           <button type="button" class="bttn bttn-dark" data-bs-toggle="tooltip" data-bs-placement="top" title="Add to cart"><i class="fas fa-shopping-basket"></i></button>
                           <button type="button" class="bttn bttn-dark" data-bs-toggle="tooltip" data-bs-placement="top" title="Add to wishlist"><i class="far fa-heart"></i></button>
                       </div>
+                      <div>
+                        <a href="/editProduct/{{ $details->id }}" class="bttn bttn-dark">Edit</a>
+                      </div>
                   </div>
               </div>
           </div>
