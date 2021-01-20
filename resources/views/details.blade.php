@@ -11,9 +11,9 @@
                           <img src="{{ $details->img }}" alt="Details image" class="img-resp details-general-image">
                           <ul>
                               <li><img src="{{ $details->img }}" alt="Details image" class="img-resp details-secondary-image"></li>
-                              <li><img src="/img/products/product_1.png" alt="Details image" class="img-resp details-secondary-image"></li>
-                              <li><img src="/img/products/product_3.png" alt="Details image" class="img-resp details-secondary-image"></li>
-                              <li><img src="/img/products/product_4.png" alt="Details image" class="img-resp details-secondary-image"></li>
+                              @foreach ($gallery as $img)
+                                <li><img src="{{ $img->src }}" alt="Details image" class="img-resp details-secondary-image"></li>
+                              @endforeach
                           </ul>
                       </div>
                   </div>

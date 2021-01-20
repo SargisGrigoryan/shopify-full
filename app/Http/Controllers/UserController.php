@@ -12,6 +12,7 @@ use File;
 // Use models
 use App\Models\User;
 use App\Models\Product;
+use App\Models\Gallery;
 
 class UserController extends Controller
 {
@@ -208,9 +209,10 @@ class UserController extends Controller
     // Get product details
     function getDetails ($id){
         $product = Product::where('status', '1')->find($id);
+        $gallery = Gallery::where('product_id', $id)->get();
 
         if($product){
-            return view('details', ['details' => $product]);
+            return view('details', ['details' => $product, 'gallery' => $gallery]);
         }else{
             return "Sorry but this product is not available now.";
         }

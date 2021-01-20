@@ -45,6 +45,12 @@
                                 <input type="file" class="form-control" id="Input3" name="general_img">
                             </div>
                             <div class="mb-3">
+                                <label for="Input3" class="form-label">Gallery</label>
+                                <input type="file" class="form-control" id="Input3" name="gallery_1">
+                                <input type="file" class="form-control mt-2" id="Input3" name="gallery_2">
+                                <input type="file" class="form-control mt-2" id="Input3" name="gallery_3">
+                            </div>
+                            <div class="mb-3">
                               <label for="Input4" class="form-label">Price</label>
                               <input type="number" class="form-control" id="Input4" name="price" min="0" placeholder="$">
                             </div>
