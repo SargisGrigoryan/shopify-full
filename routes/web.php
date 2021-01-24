@@ -32,10 +32,12 @@ Route::get('/details/{id}', [UserController::class, 'getDetails']);
 
 // VIEW
 Route::view('addProduct', 'addProduct');
+Route::view('admin', 'admin_login');
 
 // POST
 Route::post('addProduct', [AdminController::class, 'addProduct']);
 Route::post('saveProduct', [AdminController::class, 'saveProduct']);
+Route::post('admin_login', [AdminController::class, 'adminLogin']);
 
 // GET
 Route::get('editProduct/{id}', [AdminController::class, 'editProduct']);

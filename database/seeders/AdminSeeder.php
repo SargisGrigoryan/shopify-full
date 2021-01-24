@@ -2,11 +2,12 @@
 
 namespace Database\Seeders;
 
+// Use default
 use Illuminate\Database\Seeder;
 use Illuminate\Support\Facades\DB;
 use Illuminate\Support\Facades\Hash;
 
-class UserSeeder extends Seeder
+class AdminSeeder extends Seeder
 {
     /**
      * Run the database seeds.
@@ -15,12 +16,12 @@ class UserSeeder extends Seeder
      */
     public function run()
     {
-        // Register a default user for testing
-        DB::table('users')->insert([
+        // Register a new admin
+        DB::table('admins')->insert([
             'first_name' => 'Sargis',
             'last_name' => 'Grigoryan',
             'email' => 'sargis.web@gmail.com',
-            'password' => Hash::make('111')
+            'password' => Hash::make('333')
         ]);
     }
 }

@@ -24,10 +24,12 @@ class UserController extends Controller
             // Put sessions
             session()->put('user', $user);
 
+            // Keep cookies if user set remember me
             if($req->remember){
                 cookie()->queue('remember_user', $user->id, 30000);
             }
 
+            // After all redirect to home page
             return redirect('/');
 
         }else{

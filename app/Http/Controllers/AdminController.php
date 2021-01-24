@@ -6,10 +6,12 @@ namespace App\Http\Controllers;
 use Illuminate\Http\Request;
 use Carbon\Carbon;
 use File;
+use Hash;
 
 // Use models
 use App\Models\Product;
 use App\Models\Gallery;
+use App\Models\Admin;
 
 class AdminController extends Controller
 {
@@ -197,6 +199,26 @@ class AdminController extends Controller
             return "Product was successfully saved.";
         }else{
             return "Connection error, please try again later";
+        }
+    }
+
+    // Login
+    function adminLogin (Request $req){
+        $admin = Admin::where('email', $req->email)->first();
+        if($admin && Hash::check($req->password, $admin->password)){
+            // Put session
+            session()->put('admin', $admin);
+
+            // Keep cookies if admin set remember me
+            if($req->remember){
+                cookie()->queue('remember_admin', $admin->id, 30000);
+            }
+
+            // After all redirect to home page
+            return redirect('/');
+            
+        }else{
+            return "Email or password is incorrect";
         }
     }
 }
