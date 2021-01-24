@@ -26,6 +26,7 @@ Route::view('about', 'about');
 Route::get('/', [UserController::class, 'getHomePage']);
 Route::get('/home', [UserController::class, 'getHomePage']);
 Route::get('/details/{id}', [UserController::class, 'getDetails']);
+Route::get('logout', [UserController::class, 'logout']);
 
 
 // __ADMIN__
@@ -60,8 +61,6 @@ Route::group(['middleware' => ['UserLoggined']], function(){
 // __USER NOT LOGINED__
 Route::group(['middleware' => ['UserNotLoggined']], function(){
 
-    // GET
-    Route::get('logout', [UserController::class, 'logout']);
     Route::get('profile', [UserController::class, 'profile']);
     Route::get('userSettings', [UserController::class, 'userSettings']);
 

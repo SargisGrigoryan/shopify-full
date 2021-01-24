@@ -41,9 +41,11 @@ class UserController extends Controller
     function logout(){
         // Remove user sessions
         session()->pull('user');
+        session()->pull('admin');
 
         // Remove user cookies
         cookie()->queue('remember_user', '', -30000);
+        cookie()->queue('remember_admin', '', -30000);
 
         // Redirect user
         return redirect('/login');
