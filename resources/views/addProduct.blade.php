@@ -73,14 +73,14 @@
                             <div class="mb-3">
                                 <label>Slider</label>
                                 <div class="form-check">
-                                    <input class="form-check-input" type="radio" name="slider" id="flexRadioDefault2" value="0" checked>
-                                    <label class="form-check-label" for="flexRadioDefault2">
+                                    <input class="form-check-input" type="radio" name="slider" id="flexRadioDefault1" value="0" checked>
+                                    <label class="form-check-label" for="flexRadioDefault1">
                                       Off
                                     </label>
                                 </div>
                                 <div class="form-check">
-                                    <input class="form-check-input" type="radio" name="slider" id="flexRadioDefault1" value="1">
-                                    <label class="form-check-label" for="flexRadioDefault1">
+                                    <input class="form-check-input" type="radio" name="slider" id="flexRadioDefault2" value="1">
+                                    <label class="form-check-label" for="flexRadioDefault2">
                                       On
                                     </label>
                                 </div>
@@ -88,14 +88,14 @@
                             <div class="mb-3">
                                 <label>Top</label>
                                 <div class="form-check">
-                                    <input class="form-check-input" type="radio" name="top" id="flexRadioDefault2" value="0" checked>
-                                    <label class="form-check-label" for="flexRadioDefault2">
+                                    <input class="form-check-input" type="radio" name="top" id="flexRadioDefault3" value="0" checked>
+                                    <label class="form-check-label" for="flexRadioDefault3">
                                       Off
                                     </label>
                                 </div>
                                 <div class="form-check">
-                                    <input class="form-check-input" type="radio" name="top" id="flexRadioDefault1" value="1">
-                                    <label class="form-check-label" for="flexRadioDefault1">
+                                    <input class="form-check-input" type="radio" name="top" id="flexRadioDefault4" value="1">
+                                    <label class="form-check-label" for="flexRadioDefault4">
                                       On
                                     </label>
                                 </div>
@@ -103,14 +103,14 @@
                             <div class="mb-3">
                                 <label>Status</label>
                                 <div class="form-check">
-                                    <input class="form-check-input" type="radio" name="status" id="flexRadioDefault1" value="1" checked>
-                                    <label class="form-check-label" for="flexRadioDefault1">
+                                    <input class="form-check-input" type="radio" name="status" id="flexRadioDefault5" value="1" checked>
+                                    <label class="form-check-label" for="flexRadioDefault5">
                                       Active
                                     </label>
                                   </div>
                                   <div class="form-check">
-                                    <input class="form-check-input" type="radio" name="status" id="flexRadioDefault2" value="0">
-                                    <label class="form-check-label" for="flexRadioDefault2">
+                                    <input class="form-check-input" type="radio" name="status" id="flexRadioDefault6" value="0">
+                                    <label class="form-check-label" for="flexRadioDefault6">
                                       Hidden
                                     </label>
                                   </div>
