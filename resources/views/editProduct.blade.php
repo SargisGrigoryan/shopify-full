@@ -134,7 +134,7 @@
                                   <div class="form-check">
                                     <input class="form-check-input" type="radio" name="status" id="flexRadioDefault2" value="0" {{ $data->status==0?'checked':'' }}>
                                     <label class="form-check-label" for="flexRadioDefault2">
-                                      Hidden
+                                      Blocked
                                     </label>
                                   </div>
                             </div>

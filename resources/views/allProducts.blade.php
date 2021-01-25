@@ -42,19 +42,22 @@
                               @foreach ($products as $product)
                                 <tr>
                                     <th scope="row">{{ $product->id }}</th>
-                                    <td><img src="{{ $product->img }}" class="img-thumbnail-list" alt="Image"></td>
+                                    <td><a href="/details/{{ $product->id }}"><img src="{{ $product->img }}" class="img-thumbnail-list" alt="Image"></a></td>
                                     <td>{{ $product->name }}</td>
-                                    <td>{{ $product->price }}</td>
-                                    <td>{{ $product->discount }}</td>
+                                    <td>${{ $product->price }}</td>
+                                    <td>{{ $product->discount }}%</td>
                                     <td>{{ $product->in_stock }}</td>
-                                    <td>{{ $product->slider }}</td>
-                                    <td>{{ $product->top }}</td>
+                                    <td>{{ $product->slider==1?'On':'Off' }}</td>
+                                    <td>{{ $product->top==1?'On':'Off' }}</td>
                                     <td>{{ $product->date }}</td>
-                                    <td>{{ $product->status }}</td>
+                                    <td>{{ $product->status==1?'Active':'Blocked' }}</td>
                                     <td>
-                                        <a href="#" class="bttn bttn-dark"><i class="fas fa-trash-alt"></i></a>
-                                        <a href="#" class="bttn bttn-dark"><i class="fas fa-ban"></i></a>
-                                        <a href="#" class="bttn bttn-dark"><i class="fas fa-undo-alt"></i></a>
+                                        @if ($product->status != 0)
+                                            <a href="/blockProduct/{{ $product->id }}" class="bttn bttn-dark" data-bs-toggle="tooltip" data-bs-placement="top" title="Block"><i class="fas fa-ban"></i></a>
+                                        @elseif($product->status != 1)
+                                            <a href="/recoverProduct/{{ $product->id }}" class="bttn bttn-dark" data-bs-toggle="tooltip" data-bs-placement="top" title="Recover"><i class="fas fa-undo-alt"></i></a>
+                                        @endif
+                                        <a href="/removeProduct/{{ $product->id }}" class="bttn bttn-dark" data-bs-toggle="tooltip" data-bs-placement="top" title="Remove"><i class="fas fa-trash-alt"></i></a>
                                     </td>
                                 </tr>
                               @endforeach

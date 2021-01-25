@@ -224,8 +224,66 @@ class AdminController extends Controller
 
     // Get all products list
     function allProducts (){
-        $products = Product::all();
+        $products = Product::orderByDesc('id')->get();
 
         return view('allProducts', ['products' => $products]);
+    }
+
+    // Block product
+    function blockProduct ($id){
+        $product = Product::find($id);
+        $product->status = '0';
+        $result = $product->save();
+        if($result){
+            return "You have successfully blocked this product.";
+        }else{
+            return "Connection error, please try again later.";
+        }
+    }
+
+    // Recover product
+    function recoverProduct ($id){
+        $product = Product::find($id);
+        $product->status = '1';
+        $result = $product->save();
+        if($result){
+            return "You have successfully recovered this product.";
+        }else{
+            return "Connection error, please try again later.";
+        }
+    }
+
+    // Remove product
+    function removeProduct ($id){
+        // Get all product data
+        $product = Product::find($id);
+        $general_image = $product->img;
+
+        // Remove general image from files
+        if(File::exists(public_path($general_image))){
+            File::delete(public_path($general_image));
+        }
+
+        // Remove Product from db
+        $result = $product->delete();
+
+        // Get all product gallery files
+        $files = Gallery::where('product_id', $id)->get();
+
+        // Check if product removed from db
+        if($result){
+            // Remove files also
+            foreach($files as $file){
+                if(File::exists(public_path($file->src))){
+                    File::delete(public_path($file->src));
+                }
+
+                // After removing files remove files data from db
+                $file_remove = Gallery::find($file->id)->delete();
+            }
+            return "Product was successfully removed.";
+        }else{
+            return "Connection error, please try again later";
+        }
     }
 }

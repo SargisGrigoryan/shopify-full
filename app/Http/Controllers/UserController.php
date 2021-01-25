@@ -205,7 +205,7 @@ class UserController extends Controller
 
     // Get home page products from db
     function getHomePage (){
-        $all_products = Product::where('status', '1')->get();
+        $all_products = Product::orderByDesc('id')->where('status', '1')->get();
 
         return view('home', ['all_product' => $all_products]);
     }
