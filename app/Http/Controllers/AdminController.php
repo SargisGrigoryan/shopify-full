@@ -221,4 +221,11 @@ class AdminController extends Controller
             return "Email or password is incorrect";
         }
     }
+
+    // Get all products list
+    function allProducts (){
+        $products = Product::all();
+
+        return view('allProducts', ['products' => $products]);
+    }
 }

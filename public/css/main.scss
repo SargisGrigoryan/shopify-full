@@ -204,10 +204,13 @@ body{
 .social-links a:hover{
     transform: translateY(-5px);
 }
-// Responsive image
+// Images
 .img-resp{
     width: 100%;
     margin: 0 auto;
+}
+.img-thumbnail-list{
+    max-width: 150px;
 }
 
 

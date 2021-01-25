@@ -31,6 +31,7 @@
                 <a class="nav-link dropdown-toggle" href="#" id="dropdown01" data-bs-toggle="dropdown" aria-expanded="false">Admin</a>
                 <ul class="dropdown-menu" aria-labelledby="dropdown01">
                   <li><a class="dropdown-item" href="/addProduct">Add product</a></li>
+                  <li><a class="dropdown-item" href="/allProducts">All products (0)</a></li>
                 </ul>
               </li>
             @endif

@@ -223,6 +223,10 @@ body {
   margin: 0 auto;
 }
 
+.img-thumbnail-list {
+  max-width: 150px;
+}
+
 .bttn {
   display: inline-block;
   margin-top: 30px;
