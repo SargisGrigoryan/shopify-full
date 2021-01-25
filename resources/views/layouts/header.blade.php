@@ -12,9 +12,6 @@
             <a class="nav-link" href="/">Home</a>
           </li>
           <li class="nav-item">
-            <a class="nav-link" href="/details">Details</a>
-          </li>
-          <li class="nav-item">
             <a class="nav-link" href="/about#faq">FAQ</a>
           </li>
           <li class="nav-item">

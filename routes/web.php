@@ -29,22 +29,31 @@ Route::get('/details/{id}', [UserController::class, 'getDetails']);
 Route::get('logout', [UserController::class, 'logout']);
 
 
-// __ADMIN__
+// __ADMIN LOGGINED__
+Route::group(['middleware' => ['AdminLoggined']], function(){
+    // VIEW
+    Route::view('admin', 'admin_login');
 
-// VIEW
-Route::view('addProduct', 'addProduct');
-Route::view('admin', 'admin_login');
-
-// POST
-Route::post('addProduct', [AdminController::class, 'addProduct']);
-Route::post('saveProduct', [AdminController::class, 'saveProduct']);
-Route::post('admin_login', [AdminController::class, 'adminLogin']);
-
-// GET
-Route::get('editProduct/{id}', [AdminController::class, 'editProduct']);
+    // POST
+    Route::post('admin_login', [AdminController::class, 'adminLogin']);
+});
 
 
-// __USER LOGINED__
+// __ADMIN NOT LOGGINED__
+Route::group(['middleware' => ['AdminNotLoggined']], function(){
+   // VIEW
+    Route::view('addProduct', 'addProduct');
+
+    // POST
+    Route::post('addProduct', [AdminController::class, 'addProduct']);
+    Route::post('saveProduct', [AdminController::class, 'saveProduct']);
+
+    // GET
+    Route::get('editProduct/{id}', [AdminController::class, 'editProduct']);
+});
+
+
+// __USER LOGGINED__
 Route::group(['middleware' => ['UserLoggined']], function(){
 
     // VIEW
