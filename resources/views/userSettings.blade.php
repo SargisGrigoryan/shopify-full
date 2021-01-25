@@ -34,6 +34,7 @@
                             </div>
                             <div class="mb-3">
                                 <label for="Input3" class="form-label">User image</label>
+                                <div><a href="/removeUserImg">Remove user image</a></div>
                                 <img src="{{ $userData->img }}" class="img-fluid" alt="user_image">
                                 <input type="file" class="form-control" id="Input3" name="img">
                             </div>

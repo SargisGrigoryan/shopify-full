@@ -74,8 +74,10 @@ Route::group(['middleware' => ['UserLoggined']], function(){
 // __USER NOT LOGINED__
 Route::group(['middleware' => ['UserNotLoggined']], function(){
 
+    // GET
     Route::get('profile', [UserController::class, 'profile']);
     Route::get('userSettings', [UserController::class, 'userSettings']);
+    Route::get('removeUserImg', [UserController::class, 'removeUserImg']);
 
     // POST
     Route::post('saveUserDatas', [UserController::class, 'saveUserDatas']);

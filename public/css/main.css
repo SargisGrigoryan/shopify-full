@@ -403,13 +403,12 @@ section#faq {
 }
 
 section#my-profile .profile-img {
-  border-radius: 50%;
   overflow: hidden;
   margin: 0 auto;
 }
 
 section#my-profile .profile-img img {
-  height: 100%;
+  width: 100%;
 }
 
 section#my-profile ul {

@@ -26,7 +26,8 @@
               <li class="nav-item">
                 <a class="nav-link" href="/profile">My profile</a>
               </li>
-            @elseif(session()->get('admin'))
+            @endif
+            @if(session()->get('admin'))
               <li class="nav-item dropdown">
                 <a class="nav-link dropdown-toggle" href="#" id="dropdown01" data-bs-toggle="dropdown" aria-expanded="false">Admin</a>
                 <ul class="dropdown-menu" aria-labelledby="dropdown01">

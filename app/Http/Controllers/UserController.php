@@ -221,4 +221,16 @@ class UserController extends Controller
             return "Sorry but this product is not available now.";
         }
     }
+
+    // Remove user profile image
+    function removeUserImg (){
+        $user = User::find(session()->get('user')->id);
+        $image_old = $user->img;
+        $user->img = '/img/users/no_user_img.jpg';
+        $user->save();
+        if(File::exists(public_path($image_old))){
+            File::delete(public_path($image_old));
+        }
+        return "Your profile image was successfully removed.";
+    }
 }
