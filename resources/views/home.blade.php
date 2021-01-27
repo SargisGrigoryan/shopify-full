@@ -24,95 +24,50 @@
             <div class="col-12">
               <div id="carouselExampleIndicators" class="carousel slide" data-bs-ride="carousel">
                   <ol class="carousel-indicators">
-                    <li data-bs-target="#carouselExampleIndicators" data-bs-slide-to="0" class="active"></li>
-                    <li data-bs-target="#carouselExampleIndicators" data-bs-slide-to="1"></li>
-                    <li data-bs-target="#carouselExampleIndicators" data-bs-slide-to="2"></li>
+                    @for ($i = 0; $i < count($slider_products); $i++)
+                      @if (count($slider_products) > 1)
+                        <li data-bs-target="#carouselExampleIndicators" data-bs-slide-to="{{ $i }}" class="{{ $i==0?'active':'' }}"></li>
+                      @endif
+                    @endfor
                   </ol>
                   <div class="carousel-inner">
-                  
-                    <!-- Carousel item -->
-                    <div class="carousel-item active">
+                    <?php
+                      $counter = 0;  
+                    ?>
+                    @foreach ($slider_products as $slider_product)
+                      <!-- Carousel item -->
+                      <div class="carousel-item {{ $counter==0?'active':'' }}">
                         <div class="row mb-4 align-items-center">
                             <div class="col-lg-6 text-lg-end text-center">
                                 <div class="slider-text-side me-lg-5">
-                                  <div class="font_size_4">Product name</div>
-                                  <div class="font_size_7"><b>$99</b></div>
-                                  <div class="font_size_10">
-                                      Lorem Ipsum is simply dummy text of the printing and typesetting industry. 
-                                      Lorem Ipsum has been the industry's standard dummy text ever since the 1500s, 
-                                      when an unknown printer took a galley of type and scrambled it to make a type 
-                                      specimen book. It has survived not only five centuries, but also the leap into 
-                                      electronic typesetting, remaining essentially unchanged. It was popularised in 
-                                      the 1960s with the release of Letraset sheets containing Lorem Ipsum passages, 
-                                      and more recently with desktop publishin.
-                                  </div>
-                                  <button type="button" class="bttn bttn-light">See more</button>
+                                  <div class="font_size_4">{{ $slider_product->name_en }}</div>
+                                  <?php
+                                    $price_show = "$".$slider_product->price;
+                                    if($slider_product->discount != 0){
+                                      $discounted_price = $slider_product->price - ($slider_product->price * $slider_product->discount / 100);
+                                      $price_show = "<del>$".$slider_product->price."</del> $".$discounted_price;
+                                    }
+                                    $slider_product->price;
+                                  ?>
+                                  <div class="font_size_7"><?=$price_show?></div>
+                                  <div class="font_size_10">{{ $slider_product->descr_en }}</div>
+                                  <a href="/details/{{ $slider_product->id }}" class="bttn bttn-light">See more</a>
                                 </div>
                             </div>
                             <div class="col-lg-6 text-lg-start text-center">
                                 <div class="slider-image-side ms-lg-5">
-                                  <img src="img/products/bestsaller-product.png" alt="slider image">
+                                  <a href="/details/{{ $slider_product->id }}">
+                                    <img src="{{ $slider_product->slider_img }}" alt="slider image">
+                                  </a>
                                 </div>
                             </div>
                         </div>
                     </div>
                     <!-- Carousel item end -->
-                  
-                    <!-- Carousel item -->
-                    <div class="carousel-item">
-                      <div class="row mb-4 align-items-center">
-                          <div class="col-lg-6 text-lg-end text-center">
-                              <div class="slider-text-side me-lg-5">
-                                <div class="font_size_4">Product name</div>
-                                <div class="font_size_7"><b>$99</b></div>
-                                <div class="font_size_10">
-                                    Lorem Ipsum is simply dummy text of the printing and typesetting industry. 
-                                    Lorem Ipsum has been the industry's standard dummy text ever since the 1500s, 
-                                    when an unknown printer took a galley of type and scrambled it to make a type 
-                                    specimen book. It has survived not only five centuries, but also the leap into 
-                                    electronic typesetting, remaining essentially unchanged. It was popularised in 
-                                    the 1960s with the release of Letraset sheets containing Lorem Ipsum passages, 
-                                    and more recently with desktop publishin.
-                                </div>
-                                <button type="button" class="bttn bttn-light">See more</button>
-                              </div>
-                          </div>
-                          <div class="col-lg-6 text-lg-start text-center">
-                              <div class="slider-image-side ms-lg-5">
-                                <img src="img/products/Intersection_2.png" alt="slider image">
-                              </div>
-                          </div>
-                      </div>
-                    </div>
-                    <!-- Carousel item end -->
-                  
-                    <!-- Carousel item -->
-                    <div class="carousel-item">
-                      <div class="row mb-4 align-items-center">
-                          <div class="col-lg-6 text-lg-end text-center">
-                              <div class="slider-text-side me-lg-5">
-                                <div class="font_size_4">Product name</div>
-                                <div class="font_size_7"><b>$99</b></div>
-                                <div class="font_size_10">
-                                    Lorem Ipsum is simply dummy text of the printing and typesetting industry. 
-                                    Lorem Ipsum has been the industry's standard dummy text ever since the 1500s, 
-                                    when an unknown printer took a galley of type and scrambled it to make a type 
-                                    specimen book. It has survived not only five centuries, but also the leap into 
-                                    electronic typesetting, remaining essentially unchanged. It was popularised in 
-                                    the 1960s with the release of Letraset sheets containing Lorem Ipsum passages, 
-                                    and more recently with desktop publishin.
-                                </div>
-                                <button type="button" class="bttn bttn-light">See more</button>
-                              </div>
-                          </div>
-                          <div class="col-lg-6 text-lg-start text-center">
-                              <div class="slider-image-side ms-lg-5">
-                                <img src="img/products/Intersection_3.png" alt="slider image">
-                              </div>
-                          </div>
-                      </div>
-                    </div>
-                    <!-- Carousel item end -->
+                    <?php
+                      $counter++;
+                    ?>
+                    @endforeach
                   
                   </div>
               </div>
@@ -149,65 +104,29 @@
           <div class="col-12">
             <div class="owl-carousel">
             
-              <!-- Top product -->
-              <div class="product carousel-product">
-                <span class="discounted">Discounted</span>
-                <a href="#"><img src="img/products/product_1.png" alt="Product image"></a>
-                <ul>
-                  <li><button type="button" class="bttn bttn-product"><i class="far fa-heart"></i></button></li>
-                  <li><button type="button" class="bttn bttn-product"><i class="fas fa-shopping-basket"></i></button></li>
-                  <li><a href="#" class="product-name"><b>Product name</b></a><div><del>$99</del> $60</div></li>
-                </ul>
-              </div>
-              <!-- Top product end -->
-            
-              <!-- Top product -->
-              <div class="product carousel-product">
-                <span class="discounted">Discounted</span>
-                <a href="#"><img src="img/products/product_2.png" alt="Product image"></a>
-                <ul>
-                  <li><button type="button" class="bttn bttn-product"><i class="far fa-heart"></i></button></li>
-                  <li><button type="button" class="bttn bttn-product"><i class="fas fa-shopping-basket"></i></button></li>
-                  <li><a href="#" class="product-name"><b>Product name</b></a><div><del>$99</del> $60</div></li>
-                </ul>
-              </div>
-              <!-- Top product end -->
-            
-              <!-- Top product -->
-              <div class="product carousel-product">
-                <span class="discounted">Discounted</span>
-                <a href="#"><img src="img/products/product_3.png" alt="Product image"></a>
-                <ul>
-                  <li><button type="button" class="bttn bttn-product"><i class="far fa-heart"></i></button></li>
-                  <li><button type="button" class="bttn bttn-product"><i class="fas fa-shopping-basket"></i></button></li>
-                  <li><a href="#" class="product-name"><b>Product name</b></a><div><del>$99</del> $60</div></li>
-                </ul>
-              </div>
-              <!-- Top product end -->
-            
-              <!-- Top product -->
-              <div class="product carousel-product">
-                <span class="discounted">Discounted</span>
-                <a href="#"><img src="img/products/product_4.png" alt="Product image"></a>
-                <ul>
-                  <li><button type="button" class="bttn bttn-product"><i class="far fa-heart"></i></button></li>
-                  <li><button type="button" class="bttn bttn-product"><i class="fas fa-shopping-basket"></i></button></li>
-                  <li><a href="#" class="product-name"><b>Product name</b></a><div><del>$99</del> $60</div></li>
-                </ul>
-              </div>
-              <!-- Top product end -->
-            
-              <!-- Top product -->
-              <div class="product carousel-product">
-                <span class="discounted">Discounted</span>
-                <a href="#"><img src="img/products/product_5.png" alt="Product image"></a>
-                <ul>
-                  <li><button type="button" class="bttn bttn-product"><i class="far fa-heart"></i></button></li>
-                  <li><button type="button" class="bttn bttn-product"><i class="fas fa-shopping-basket"></i></button></li>
-                  <li><a href="#" class="product-name"><b>Product name</b></a><div><del>$99</del> $60</div></li>
-                </ul>
-              </div>
-              <!-- Top product end -->
+              @foreach ($top_products as $top_product)
+                <!-- Top product -->
+                <div class="product carousel-product">
+                  @if ($top_product->discount != 0)
+                    <span class="discounted">Discounted</span>
+                  @endif
+                  <a href="/details/{{ $top_product->id }}"><img src="{{ $top_product->img }}" alt="Product image"></a>
+                  <ul>
+                    <li><button type="button" class="bttn bttn-product"><i class="far fa-heart"></i></button></li>
+                    <li><button type="button" class="bttn bttn-product"><i class="fas fa-shopping-basket"></i></button></li>
+                    <?php
+                      $price_show = "$".$top_product->price;
+                      if($top_product->discount != 0){
+                        $discounted_price = $top_product->price - ($top_product->price * $top_product->discount / 100);
+                        $price_show = "<del>$".$top_product->price."</del> $".$discounted_price;
+                      }
+                      $top_product->price;
+                    ?>
+                    <li><a href="/details/{{ $top_product->id }}" class="product-name"><b>{{ $top_product->name_en }}</b></a><div><?=$price_show?></div></li>
+                  </ul>
+                </div>
+                <!-- Top product end -->
+              @endforeach
             
             </div>
           </div>
@@ -259,7 +178,7 @@
                     }
                     $product->price;
                   ?>
-                  <li><a href="#" class="product-name"><b>{{ $product->name_en }}</b></a><div><?=$price_show?></div></li>
+                  <li><a href="/details/{{ $product->id }}" class="product-name"><b>{{ $product->name_en }}</b></a><div><?=$price_show?></div></li>
                 </ul>
               </div>
             </div>

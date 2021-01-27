@@ -94,7 +94,7 @@
                     <div class="col-12 d-flex justify-content-md-start justify-content-center">
                         <div class="comment-bg">
                             <div class="user-img">
-                                <img src="/img/users/user_img.jpg" alt="User image" class="img-resp">
+                                <img src="/img/users/no_user_img.jpg" alt="User image" class="img-resp">
                             </div>
                             <div class="user-comment">
                                 <div class="font_size_9"><b>User name</b></div>
@@ -124,7 +124,7 @@
                                 <div class="mt-2 font_size_13 color_5">15.01.2021</div>
                             </div>
                             <div class="user-img">
-                                <img src="/img/users/user_img.jpg" alt="User image" class="img-resp">
+                                <img src="/img/users/no_user_img.jpg" alt="User image" class="img-resp">
                             </div>
                         </div>
                     </div>

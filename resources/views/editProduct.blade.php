@@ -109,6 +109,11 @@
                                 </div>
                             </div>
                             <div class="mb-3">
+                                <label for="Input9" class="form-label">Slider image</label>
+                                <div><img src="{{ $data->slider_img==null?'/img/products/no-photo.png':$data->slider_img }}" class="img-thumbnail" alt="Image"></div>
+                                <input type="file" class="form-control" id="Input9" name="slider_img">
+                            </div>
+                            <div class="mb-3">
                                 <label>Top</label>
                                 <div class="form-check">
                                     <input class="form-check-input" type="radio" name="top" id="flexRadioDefault2" value="0" {{ $data->top==0?'checked':'' }}>

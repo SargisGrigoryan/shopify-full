@@ -12,8 +12,8 @@
                     </div>
                 </div>
                 <div class="col-md-6 mt-3">
-                    <div class="font_size_4">{{ $userData->first_name }} {{ $userData->last_name }}</div>
-                    <div class="font_size_7">{{ $userData->email }}</div>
+                    <div class="font_size_5">{{ $userData->first_name }} {{ $userData->last_name }}</div>
+                    <div class="font_size_8">{{ $userData->email }}</div>
                     <div class="font_size_10 mt-2"><i class="fas fa-shopping-cart"></i> Happy customer - 65</div>
                     <div class="font_size_10 mt-2"><i class="fas fa-money-check-alt"></i> Spent money - $4800</div>
                     <ul>

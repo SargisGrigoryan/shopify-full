@@ -24,15 +24,27 @@ class AdminController extends Controller
         $product->name_ru = $req->name_ru;
         $product->descr_en = $req->descr_en;
         $product->descr_ru = $req->descr_ru;
+
+        // General image
         $general_image = $req->file('general_img');
         $image_name = md5(Carbon::now().rand(1,10)).'.'.$general_image->getClientOriginalExtension();
         $product->img   = '/'.'img/products/'.$image_name;
+
         $product->price = $req->price;
         $product->discount = $req->discount;
         $product->in_stock = $req->in_stock;
         $product->options_en = $req->options_en;
         $product->options_ru = $req->options_ru;
         $product->slider = $req->slider;
+
+        // Slider image
+        if($req->slider == 1){
+            $slider_image = $req->file('slider_img');
+            $slider_image_name = md5(Carbon::now().rand(1,10)).'.'.$slider_image->getClientOriginalExtension();
+            $product->slider_img   = '/'.'img/products/'.$slider_image_name;
+        }
+
+
         $product->top = $req->top;
         $product->status = $req->status;
 
@@ -75,7 +87,14 @@ class AdminController extends Controller
                     $gallery_3->move(base_path('\public\img\products'), $gallery_3_name);
                 }
             }
+
+            // General image
             $general_image->move(base_path('\public\img\products'), $image_name);
+
+            // Slider image
+            if($req->slider == 1){
+                $slider_image->move(base_path('\public\img\products'), $slider_image_name);
+            }
             return "Product was successfully added.";
         }else{
             return "Connection error, please try again later";
@@ -99,6 +118,8 @@ class AdminController extends Controller
         $product->name_ru = $req->name_ru;
         $product->descr_en = $req->descr_en;
         $product->descr_ru = $req->descr_ru;
+
+        // General image
         $general_image = $req->file('general_img');
         if($general_image){
             $image_name = md5(Carbon::now().rand(1,10)).'.'.$general_image->getClientOriginalExtension();
@@ -108,12 +129,25 @@ class AdminController extends Controller
             }
             $product->img   = '/'.'img/products/'.$image_name;
         }
+
         $product->price = $req->price;
         $product->discount = $req->discount;
         $product->in_stock = $req->in_stock;
         $product->options_en = $req->options_en;
         $product->options_ru = $req->options_ru;
         $product->slider = $req->slider;
+
+        // Slider image
+        $slider_image = $req->file('slider_img');
+        if($req->slider == '1' && $slider_image){
+            $slider_image_name = md5(Carbon::now().rand(1,10)).'.'.$slider_image->getClientOriginalExtension();
+            $slider_image_old = $product->slider_img;
+            if(File::exists(public_path($slider_image_old))){
+                File::delete(public_path($slider_image_old));
+            }
+            $product->slider_img   = '/'.'img/products/'.$slider_image_name;
+        }
+
         $product->top = $req->top;
         $product->status = $req->status;
 
@@ -193,9 +227,16 @@ class AdminController extends Controller
                 }
             }
 
+            // General image
             if($general_image){
                 $general_image->move(base_path('\public\img\products'), $image_name);
             }
+
+            // Slider image
+            if($req->slider == '1' && $slider_image){
+                $slider_image->move(base_path('\public\img\products'), $slider_image_name);
+            }
+
             return "Product was successfully saved.";
         }else{
             return "Connection error, please try again later";
@@ -258,10 +299,16 @@ class AdminController extends Controller
         // Get all product data
         $product = Product::find($id);
         $general_image = $product->img;
+        $slider_image = $product->slider_img;
 
         // Remove general image from files
         if(File::exists(public_path($general_image))){
             File::delete(public_path($general_image));
+        }
+
+        // Remove slider image from files
+        if(File::exists(public_path($slider_image))){
+            File::delete(public_path($slider_image));
         }
 
         // Remove Product from db

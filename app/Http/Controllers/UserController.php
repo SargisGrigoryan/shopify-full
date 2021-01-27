@@ -205,9 +205,11 @@ class UserController extends Controller
 
     // Get home page products from db
     function getHomePage (){
+        $slider_products = Product::where('slider', '1')->whereNotIn('in_stock', [0])->orderByDesc('id')->where('status', '1')->limit(12)->get();
+        $top_products = Product::where('top', '1')->whereNotIn('in_stock', [0])->orderByDesc('id')->where('status', '1')->limit(12)->get();
         $all_products = Product::orderByDesc('id')->where('status', '1')->get();
 
-        return view('home', ['all_product' => $all_products]);
+        return view('home', ['all_product' => $all_products, 'top_products' => $top_products, 'slider_products' => $slider_products]);
     }
 
     // Get product details
