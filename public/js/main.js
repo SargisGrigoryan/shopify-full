@@ -34,10 +34,4 @@ $(function(){
         var imgSrc = $(this).attr('src');
         $('.details-general-image').attr('src', imgSrc);
     })
-
-    // Dropdown
-    $('.dropdown').on('click', function(){
-        $(this).toggleClass('show');
-        $(this).find('.dropdown-menu').toggleClass('show');
-    })
 });

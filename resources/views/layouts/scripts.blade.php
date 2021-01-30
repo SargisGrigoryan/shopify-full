@@ -45,7 +45,6 @@
                         notificPlace.html(messages);
                         notificBell.append('<span class="notifications-num">' + data.length + '</span>')
                     }
-                    
                 });
             }, 1000)
 
