@@ -37,11 +37,6 @@
                         for(i = 0; i < data.length; i++){
                             messages += '<li><b>' + data[i]['header'] + '</b><button type="button" class="remove-notify" data-id="' + data[i]['id'] + '"><i class="fas fa-times"></i></button><div class="font_size_12 mt-2">' + data[i]['content'] + '</div><div class="color_5 font_size_13 mt-1">' + data[i]['date'] + '</div></li>';
                         }
-                        if(data.length > 3){
-                            notificPlace.addClass('with-scrolling');
-                        }else{
-                            notificPlace.removeClass('with-scrolling');
-                        }
                         notificPlace.html(messages);
                         notificBell.append('<span class="notifications-num">' + data.length + '</span>')
                     }
