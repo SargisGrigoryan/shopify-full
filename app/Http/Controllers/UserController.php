@@ -238,10 +238,25 @@ class UserController extends Controller
     }
 
     // Get user notifications
-    public function getUserNotifications(){
+    public function getUserNotifications (){
         // return response()->json(["Im working..."]);
-        $user_id = session('user')->id;
-        $notifications = Notification::where('user_id', $user_id)->where('status', '0')->orWhere('status', '1')->get();
+        $user_id = session()->get('user')->id;
+        $notifications = Notification::orderByDesc('id')->where('status', '0')->orWhere('status', '1')->where('user_id', $user_id)->get();
         return $notifications;
+    }
+
+    // Remove user message
+    public function removeMessage (Request $req){
+        // Take user id
+        $user_id = session()->get('user')->id;
+
+        // Check user with that id
+        $notification = Notification::find($req->target);
+
+        // CHeck user id with target's user id
+        if($notification->user_id == $user_id){
+            $notification->status = '2';
+            $notification->save();
+        }
     }
 }

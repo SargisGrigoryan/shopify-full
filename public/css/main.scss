@@ -297,6 +297,10 @@ nav.navbar .notifications-bell .dropdown-menu{
     line-height: 17px;
     min-width: 350px;
 }
+nav.navbar .notifications-bell .dropdown-menu.with-scrolling{
+    max-height: 404px;
+    overflow-y: scroll;
+}
 nav.navbar .notifications-bell .dropdown-menu li:not(:first-child){
     border-top: 1px solid $color_8;
     margin-top: 20px;
@@ -307,9 +311,10 @@ nav.navbar .notifications-bell .dropdown-menu li b{
     color: $color_9;
 }
 nav.navbar .notifications-bell .dropdown-menu li .remove-notify{
-    text-decoration: none;
     float: right;
     font-size: $font_size_13;
+    background: none;
+    border: none;
 }
 
 

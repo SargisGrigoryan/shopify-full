@@ -318,6 +318,11 @@ nav.navbar .notifications-bell .dropdown-menu {
   min-width: 350px;
 }
 
+nav.navbar .notifications-bell .dropdown-menu.with-scrolling {
+  max-height: 404px;
+  overflow-y: scroll;
+}
+
 nav.navbar .notifications-bell .dropdown-menu li:not(:first-child) {
   border-top: 1px solid #ebebeb;
   margin-top: 20px;
@@ -330,9 +335,10 @@ nav.navbar .notifications-bell .dropdown-menu li b {
 }
 
 nav.navbar .notifications-bell .dropdown-menu li .remove-notify {
-  text-decoration: none;
   float: right;
   font-size: 11px;
+  background: none;
+  border: none;
 }
 
 section#slider {

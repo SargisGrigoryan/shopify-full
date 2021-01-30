@@ -8,12 +8,14 @@
       </button>
       <div class="collapse navbar-collapse" id="navbarCollapse">
         <ul class="navbar-nav ms-auto">
-          <li class="nav-item dropdown notifications-bell">
-            <a class="nav-link font_size_9" href="#" id="dropdown01" data-bs-toggle="dropdown" aria-expanded="false"><i class="fas fa-bell"></i></a>
-            <ul class="dropdown-menu dropdown-menu-end" aria-labelledby="dropdown01">
-              <li><div class="color_5 font_size_9 mt-1">No result is found</div></li>
-            </ul>
-          </li>
+          @if (session()->has('user'))
+            <li class="nav-item dropdown notifications-bell">
+              <a class="nav-link font_size_9" href="#" id="dropdown01" data-bs-toggle="dropdown" aria-expanded="false"><i class="fas fa-bell"></i></a>
+              <ul class="dropdown-menu dropdown-menu-end" aria-labelledby="dropdown01">
+                <li><div class="color_5 font_size_9 mt-1">No result is found</div></li>
+              </ul>
+            </li>
+          @endif
           <li class="nav-item">
             <a class="nav-link" href="/">Home</a>
           </li>

@@ -24,21 +24,39 @@
                 }
             });
 
-            $.post("{{ route('ajax.request.getusernotifications') }}", function(data){
-                var notificBell = $('.notifications-bell');
-                var notificPlace = $('.notifications-bell .dropdown-menu');
-                var messages = [];
-                
-                if(data.length < 1){
-                    notificPlace.html('<li><div class="color_5 font_size_10 mt-1">No messages yet.</div></li>');
-                }else{
-                    for(i = 0; i < data.length; i++){
-                        messages += '<li><b>' + data[i]['header'] + '</b><a href="#" class="remove-notify"><i class="fas fa-times"></i></a><div class="font_size_12 mt-2">' + data[i]['content'] + '</div><div class="color_5 font_size_13 mt-1">' + data[i]['date'] + '</div></li>';
+            // Get user messages with ajax
+            setInterval(function(){
+                $.post("{{ route('ajax.request.getusernotifications') }}", function(data){
+                    var notificBell = $('.notifications-bell');
+                    var notificPlace = $('.notifications-bell .dropdown-menu');
+                    var messages = [];
+                    
+                    if(data.length < 1){
+                        notificPlace.html('<li><div class="color_5 font_size_10 mt-1">No messages yet.</div></li>');
+                    }else{
+                        for(i = 0; i < data.length; i++){
+                            messages += '<li><b>' + data[i]['header'] + '</b><button type="button" class="remove-notify" data-id="' + data[i]['id'] + '"><i class="fas fa-times"></i></button><div class="font_size_12 mt-2">' + data[i]['content'] + '</div><div class="color_5 font_size_13 mt-1">' + data[i]['date'] + '</div></li>';
+                        }
+                        if(data.length > 3){
+                            notificPlace.addClass('with-scrolling');
+                        }else{
+                            notificPlace.removeClass('with-scrolling');
+                        }
+                        notificPlace.html(messages);
+                        notificBell.append('<span class="notifications-num">' + data.length + '</span>')
                     }
-                    notificPlace.html(messages);
-                    notificBell.append('<span class="notifications-num">' + data.length + '</span>')
-                }
-                
+                    
+                });
+            }, 1000)
+
+            // Remove user message
+            $('body').on('click', '.remove-notify', function(){
+                var target = $(this).data('id');
+                $.ajax({
+                    url: "{{ route('ajax.request.removemessage') }}",
+                    type: "POST",
+                    data: {target: target}
+                })
             });
         })
     </script>
