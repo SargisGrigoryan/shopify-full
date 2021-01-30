@@ -13,6 +13,7 @@ use File;
 use App\Models\User;
 use App\Models\Product;
 use App\Models\Gallery;
+use App\Models\Notification;
 
 class UserController extends Controller
 {
@@ -234,5 +235,13 @@ class UserController extends Controller
             File::delete(public_path($image_old));
         }
         return "Your profile image was successfully removed.";
+    }
+
+    // Get user notifications
+    public function getUserNotifications(){
+        // return response()->json(["Im working..."]);
+        $user_id = session('user')->id;
+        $notifications = Notification::where('user_id', $user_id)->where('status', '0')->orWhere('status', '1')->get();
+        return $notifications;
     }
 }

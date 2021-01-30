@@ -82,4 +82,7 @@ Route::group(['middleware' => ['UserNotLoggined']], function(){
     // POST
     Route::post('saveUserDatas', [UserController::class, 'saveUserDatas']);
 
+    // AJAX
+    Route::post('ajax/request/getusernotifications', [UserController::class, 'getUserNotifications'])->name('ajax.request.getusernotifications');
+
 });

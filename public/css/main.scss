@@ -9,6 +9,7 @@ $color_7: #333333;
 $color_8: #ebebeb;
 $color_9: #646464;
 $color_10: #787878;
+$color_11: #ff5555;
 
 // ___Fonts___
 $font_size_1: 80px;
@@ -24,6 +25,7 @@ $font_size_10: 16px;
 $font_size_11: 14px;
 $font_size_12: 12px;
 $font_size_13: 11px;
+
 
 // ___General___
 *{
@@ -273,6 +275,42 @@ nav.navbar .nav-item .nav-link{
 nav.navbar .navbar-toggler{
     color: #fff;
 }
+nav.navbar .notifications-bell{
+    position: relative;
+}
+nav.navbar .notifications-bell .notifications-num{
+    background-color: $color_11;
+    color: $color_6;
+    position: absolute;
+    top: 0;
+    left: 0;
+    border-radius: 50%;
+    width: 16px;
+    height: 16px;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    font-size: $font_size_13;
+}
+nav.navbar .notifications-bell .dropdown-menu{
+    padding: 10px;
+    line-height: 17px;
+    min-width: 350px;
+}
+nav.navbar .notifications-bell .dropdown-menu li:not(:first-child){
+    border-top: 1px solid $color_8;
+    margin-top: 20px;
+    padding-top: 10px;
+}
+nav.navbar .notifications-bell .dropdown-menu li .remove-notify,
+nav.navbar .notifications-bell .dropdown-menu li b{
+    color: $color_9;
+}
+nav.navbar .notifications-bell .dropdown-menu li .remove-notify{
+    text-decoration: none;
+    float: right;
+    font-size: $font_size_13;
+}
 
 
 // ___Sections___
@@ -430,6 +468,11 @@ footer ul li a{
 // ___Breakpoints___
 
 @media (max-width: 576px) {
+    // Navigation
+    nav.navbar .notifications-bell{ 
+        padding: 0 5px;
+    }
+
     // Comments
     section#comments .comment-bg{
        max-width: 100%;
@@ -449,6 +492,11 @@ footer ul li a{
 }
 
 @media (min-width: 576px) {
+    // Navigation
+    nav.navbar .notifications-bell{ 
+        padding: 0 5px;
+    }
+
     // Comments
     section#comments .comment-bg{
        max-width: 100%;
@@ -468,6 +516,11 @@ footer ul li a{
 }
 
 @media (min-width: 768px) {
+    // Navigation
+    nav.navbar .notifications-bell{ 
+        padding: 0;
+    }
+
     // Comments
     section#comments .comment-bg{
         max-width: 50%;
