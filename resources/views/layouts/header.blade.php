@@ -9,7 +9,7 @@
       <div class="collapse navbar-collapse" id="navbarCollapse">
         <ul class="navbar-nav ms-auto">
           @if (session()->has('user'))
-            <li class="nav-item dropdown notifications-bell">
+            <li class="nav-item dropdown notifications-bell" id="dropdown-notifs">
               <a class="nav-link font_size_9" href="#" id="dropdown01" data-bs-toggle="dropdown" aria-expanded="false"><i class="fas fa-bell"></i></a>
               <ul class="dropdown-menu dropdown-menu-end" aria-labelledby="dropdown01">
                 <li><div class="color_5 font_size_9 mt-1">No result is found</div></li>

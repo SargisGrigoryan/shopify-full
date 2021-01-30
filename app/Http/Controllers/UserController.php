@@ -259,4 +259,12 @@ class UserController extends Controller
             $notification->save();
         }
     }
+
+    // Notifications are seen by user
+    public function notifisSeen (){
+        // Take user id
+        $user_id = session()->get('user')->id;
+
+        Notification::where('user_id', $user_id)->update(['status' => '1']);
+    }
 }
