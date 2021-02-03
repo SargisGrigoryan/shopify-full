@@ -491,6 +491,11 @@ section#my-profile ul li a:hover {
   text-decoration: underline;
 }
 
+section#allNotifications .table tr {
+  height: 50px;
+  background-color: #F6F6F6;
+}
+
 section#editProduct .img-gallery {
   max-width: 100px;
   border: 2px solid #8D8D8D;

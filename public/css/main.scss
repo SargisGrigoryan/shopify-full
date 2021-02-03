@@ -457,6 +457,12 @@ section#my-profile ul li a:hover{
     text-decoration: underline;
 }
 
+// All notifications
+section#allNotifications .table tr{
+    height: 50px;
+    background-color: $color_1;
+}
+
 // Edit products
 section#editProduct .img-gallery{
     max-width: 100px;

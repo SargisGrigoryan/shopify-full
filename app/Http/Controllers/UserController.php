@@ -288,4 +288,11 @@ class UserController extends Controller
 
         Notification::where('user_id', $user_id)->where('status', '0')->update(['status' => '1']);
     }
+
+    // Get all notifications from db
+    public function allNotifications (){
+        $user_id = session()->get('user')->id;
+        $notif = Notification::where('user_id', $user_id)->get();
+        return view('allNotifications', ['notifics' => $notif]);
+    }
 }

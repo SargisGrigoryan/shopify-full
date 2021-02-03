@@ -48,6 +48,7 @@
                         }
                         notificPlace.html(messages);
                     }
+                    notificPlace.append('<li><a href="/allNotifications">See all notifications</a></li>');
                 });
             }, 1000)
 
