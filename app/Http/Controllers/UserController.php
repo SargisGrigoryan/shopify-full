@@ -34,7 +34,8 @@ class UserController extends Controller
             return redirect('/');
 
         }else{
-            return "Email or password is incorrect";
+            session()->flash('notify_danger', 'Email or password is incorrect');
+            return redirect()->back();
         }
     }
 
@@ -79,10 +80,12 @@ class UserController extends Controller
 
         // Check all required fileds
         if(!$req->first_name){
-            return "First name is required.";
+            session()->flash('notify_warning', 'First name is required.');
+            return redirect()->back();
         }
         if(!$req->last_name){
-            return "Last name is required.";
+            session()->flash('notify_warning', 'Last name is required.');
+            return redirect()->back();
         }
         if($req->file('img')){
             $personal_image = $req->file('img');
@@ -90,17 +93,21 @@ class UserController extends Controller
             $image_full_name = '/'.'img/users/'.$image_name;
         }
         if(!$req->email){
-            return "Email is required.";
+            session()->flash('notify_warning', 'Email is required.');
+            return redirect()->back();
         }
         $user = User::where('email', $req->email)->first();
         if($user){
-            return "Email is already exists, please try another one.";
+            session()->flash('notify_warning', 'Email is already exists, please try another one.');
+            return redirect()->back();
         }
         if(!$req->password){
-            return "Password is required.";
+            session()->flash('notify_warning', 'Password is required.');
+            return redirect()->back();
         }
         if(!$req->confirm_password){
-            return "Confirm password is required.";
+            session()->flash('notify_warning', 'Confirm password is required.');
+            return redirect()->back();
         }
 
         // check password confirmation
@@ -119,13 +126,16 @@ class UserController extends Controller
                 if($personal_image != null){
                     $personal_image->move(base_path('\public\img\users'), $image_name);
                 }
-                return "You have successfully registered.";
+                session()->flash('notify_success', 'You have successfully registered.');
+                return redirect()->back();
             }else{
-                return "Connection error, please try again later.";
+                session()->flash('notify_danger', 'Connection error, please try again later.');
+                return redirect()->back();
             }
 
         }else{
-            return "Confirm password is incorrect.";
+            session()->flash('notify_warning', 'Confirm password is incorrect.');
+            return redirect()->back();
         }
     }
 
@@ -140,13 +150,16 @@ class UserController extends Controller
     function saveUserDatas (Request $req){
         // Check all required fileds
         if(!$req->first_name){
-            return "First name is required.";
+            session()->flash('notify_warning', 'First name is required.');
+            return redirect()->back();
         }
         if(!$req->last_name){
-            return "Last name is required.";
+            session()->flash('notify_warning', 'Last name is required.');
+            return redirect()->back();
         }
         if(!$req->email){
-            return "Email is required.";
+            session()->flash('notify_warning', 'Email is required.');
+            return redirect()->back();
         }
 
         $user = User::find(session()->get('user')->id);
@@ -160,19 +173,23 @@ class UserController extends Controller
         if($req->current_password){
             if(Hash::check($req->current_password, $user->password)){
                 if(!$req->new_password){
-                    return "If you wrote current password than new password is required.";
+                    session()->flash('notify_warning', 'If you have wrote current password, than new password is required.');
+                    return redirect()->back();
                 }
                 if($req->new_password == $req->confirm_password){
                     $user->password = Hash::make($req->new_password);
                 }else{
-                    return "Confirm password is incorrect";
+                    session()->flash('notify_warning', 'Confirm password is incorrect.');
+                    return redirect()->back();
                 }
             }else{
-                return "Current password is incorrect";
+                session()->flash('notify_warning', 'Current password is incorrect.');
+                return redirect()->back();
             }
         }else{
             if($req->new_password || $req->confirm_password){
-                return "Please write current password for changing.";
+                session()->flash('notify_warning', 'Please write current password for changing.');
+                return redirect()->back();
             }
         }
 
@@ -198,9 +215,11 @@ class UserController extends Controller
                 }
                 $personal_img_new->move(base_path('\public\img\users'), $image_name);
             }
-            return "Your data was successfully updated.";
+            session()->flash('notify_success', 'Your data was successfully updated.');
+            return redirect()->back();
         }else{
-            return "Connection error, please try again later.";
+            session()->flash('notify_danger', 'Connection error, please try again later.');
+            return redirect()->back();
         }
     }
 
@@ -221,7 +240,8 @@ class UserController extends Controller
         if($product){
             return view('details', ['details' => $product, 'gallery' => $gallery]);
         }else{
-            return "Sorry but this product is not available now.";
+            session()->flash('notify_danger', 'Sorry but this product is not available now.');
+            return redirect()->back();
         }
     }
 
@@ -234,7 +254,8 @@ class UserController extends Controller
         if(File::exists(public_path($image_old))){
             File::delete(public_path($image_old));
         }
-        return "Your profile image was successfully removed.";
+        session()->flash('notify_success', 'Your profile image was successfully removed.');
+        return redirect()->back();
     }
 
     // Get user notifications
@@ -256,7 +277,7 @@ class UserController extends Controller
         // CHeck user id with target's user id
         if($notification->user_id == $user_id){
             $notification->status = '2';
-            $notification->save();
+            $result = $notification->save();
         }
     }
 
@@ -265,6 +286,6 @@ class UserController extends Controller
         // Take user id
         $user_id = session()->get('user')->id;
 
-        Notification::where('user_id', $user_id)->update(['status' => '1']);
+        Notification::where('user_id', $user_id)->where('status', '0')->update(['status' => '1']);
     }
 }

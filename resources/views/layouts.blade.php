@@ -25,7 +25,7 @@ if(Cookie::get('remember_user')){
     @include('layouts/header')
 
     {{-- Include notifications --}}
-
+    @include('layouts/notifications')
 
     {{-- Include content --}}
     @yield('content')

@@ -34,4 +34,16 @@ $(function(){
         var imgSrc = $(this).attr('src');
         $('.details-general-image').attr('src', imgSrc);
     })
+
+    // Notification disappearing
+    if($('.alert')){
+        setTimeout(function(){
+            $('.alert').fadeOut('1000');
+        }, '5000');
+    }
 });
+
+function notify(type, message){
+    var notify = '<div class="alert alert-' + type + ' alert-dismissible fade show" role="alert">' + message + '<button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close"></button></div>';
+    $('.notifications').html(notify);
+}

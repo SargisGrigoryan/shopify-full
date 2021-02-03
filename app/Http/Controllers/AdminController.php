@@ -95,9 +95,11 @@ class AdminController extends Controller
             if($req->slider == 1){
                 $slider_image->move(base_path('\public\img\products'), $slider_image_name);
             }
-            return "Product was successfully added.";
+            session()->flash('notify_success', 'Product was successfully added.');
+            return redirect()->back();
         }else{
-            return "Connection error, please try again later";
+            session()->flash('notify_danger', 'Connection error, please try again later.');
+            return redirect()->back();
         }
     }
 
@@ -237,9 +239,11 @@ class AdminController extends Controller
                 $slider_image->move(base_path('\public\img\products'), $slider_image_name);
             }
 
-            return "Product was successfully saved.";
+            session()->flash('notify_success', 'Product was successfully saved.');
+            return redirect()->back();
         }else{
-            return "Connection error, please try again later";
+            session()->flash('notify_danger', 'Connection error, please try again later.');
+            return redirect()->back();
         }
     }
 
@@ -259,7 +263,8 @@ class AdminController extends Controller
             return redirect('/');
             
         }else{
-            return "Email or password is incorrect";
+            session()->flash('notify_warning', 'Email or password is incorrect.');
+            return redirect()->back();
         }
     }
 
@@ -276,9 +281,11 @@ class AdminController extends Controller
         $product->status = '0';
         $result = $product->save();
         if($result){
-            return "You have successfully blocked this product.";
+            session()->flash('notify_success', 'You have successfully blocked this product.');
+            return redirect()->back();
         }else{
-            return "Connection error, please try again later.";
+            session()->flash('notify_danger', 'Connection error, please try again later.');
+            return redirect()->back();
         }
     }
 
@@ -288,9 +295,11 @@ class AdminController extends Controller
         $product->status = '1';
         $result = $product->save();
         if($result){
-            return "You have successfully recovered this product.";
+            session()->flash('notify_success', 'You have successfully recovered this product.');
+            return redirect()->back();
         }else{
-            return "Connection error, please try again later.";
+            session()->flash('notify_danger', 'Connection error, please try again later.');
+            return redirect()->back();
         }
     }
 
@@ -328,9 +337,11 @@ class AdminController extends Controller
                 // After removing files remove files data from db
                 $file_remove = Gallery::find($file->id)->delete();
             }
-            return "Product was successfully removed.";
+            session()->flash('notify_success', 'Product was successfully removed.');
+            return redirect()->back();
         }else{
-            return "Connection error, please try again later";
+            session()->flash('notify_danger', 'Connection error, please try again later.');
+            return redirect()->back();
         }
     }
 }
