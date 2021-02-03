@@ -187,9 +187,14 @@
         
         </div>
         <div class="row">
-            <div class="col-12 text-center">
-              <button type="button" class="bttn bttn-dark my-0">Load more</button>
-            </div>
+
+          <!-- Pagination -->
+          <div class="col-12 text-center mt-3">
+            <hr>
+            {{ $all_product->links('vendor.pagination.custom') }}
+          </div>
+          <!-- Pagination end -->
+
         </div>
       </div>
     </div>

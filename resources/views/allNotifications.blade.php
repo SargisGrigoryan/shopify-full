@@ -49,6 +49,13 @@
                             <div class="font_size_7 color_5 text-center">No result is found</div>
                         @endif
                     </div>
+
+                    <!-- Pagination -->
+                    <div class="col-12 text-center mt-3">
+                        {{ $notifics->links('vendor.pagination.custom') }}
+                    </div>
+                    <!-- Pagination end -->
+
                 </div>
             </div>
         </div>

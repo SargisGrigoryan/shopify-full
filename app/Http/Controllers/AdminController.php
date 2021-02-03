@@ -251,6 +251,9 @@ class AdminController extends Controller
     function adminLogin (Request $req){
         $admin = Admin::where('email', $req->email)->first();
         if($admin && Hash::check($req->password, $admin->password)){
+            // Remove all user sessions
+            session()->pull('user');
+
             // Put session
             session()->put('admin', $admin);
 
@@ -270,7 +273,7 @@ class AdminController extends Controller
 
     // Get all products list
     function allProducts (){
-        $products = Product::orderByDesc('id')->get();
+        $products = Product::orderByDesc('id')->paginate(2);
 
         return view('allProducts', ['products' => $products]);
     }

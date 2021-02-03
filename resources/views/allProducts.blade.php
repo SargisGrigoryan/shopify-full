@@ -70,6 +70,11 @@
                         @endif
                         
                     </div>
+                    <!-- Pagination -->
+                    <div class="col-12 text-center mt-3">
+                        {{ $products->links('vendor.pagination.custom') }}
+                    </div>
+                    <!-- Pagination end -->
                 </div>
             </div>
         </div>

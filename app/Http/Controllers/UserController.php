@@ -22,6 +22,9 @@ class UserController extends Controller
         // Find account
         $user = User::where('email', $req->email)->first();
         if($user && Hash::check($req->password, $user->password)){
+            // Remove all admin sessions
+            session()->pull('admin');
+            
             // Put sessions
             session()->put('user', $user);
 
@@ -227,7 +230,7 @@ class UserController extends Controller
     function getHomePage (){
         $slider_products = Product::where('slider', '1')->whereNotIn('in_stock', [0])->orderByDesc('id')->where('status', '1')->limit(12)->get();
         $top_products = Product::where('top', '1')->whereNotIn('in_stock', [0])->orderByDesc('id')->where('status', '1')->limit(12)->get();
-        $all_products = Product::orderByDesc('id')->where('status', '1')->get();
+        $all_products = Product::orderByDesc('id')->where('status', '1')->paginate(16);
 
         return view('home', ['all_product' => $all_products, 'top_products' => $top_products, 'slider_products' => $slider_products]);
     }
@@ -292,7 +295,7 @@ class UserController extends Controller
     // Get all notifications from db
     public function allNotifications (){
         $user_id = session()->get('user')->id;
-        $notif = Notification::where('user_id', $user_id)->get();
+        $notif = Notification::where('user_id', $user_id)->paginate(6);
         return view('allNotifications', ['notifics' => $notif]);
     }
 }
