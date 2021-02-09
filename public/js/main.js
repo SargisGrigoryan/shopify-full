@@ -36,9 +36,9 @@ $(function(){
     })
 
     // Notification disappearing
-    if($('.alert')){
+    if($('body').find('.alert')){
         setTimeout(function(){
-            $('.alert').fadeOut('1000');
+            $('body').find('.alert').fadeOut('1000');
         }, '5000');
     }
 });

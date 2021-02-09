@@ -79,6 +79,8 @@ Route::group(['middleware' => ['UserNotLoggined']], function(){
     Route::get('userSettings', [UserController::class, 'userSettings']);
     Route::get('removeUserImg', [UserController::class, 'removeUserImg']);
     Route::get('allNotifications', [UserController::class, 'allNotifications']);
+    Route::get('cart', [UserController::class, 'cart']);
+    Route::get('removeFromCart/{id}', [UserController::class, 'removeFromCart']);
 
     // POST
     Route::post('saveUserDatas', [UserController::class, 'saveUserDatas']);
@@ -87,4 +89,5 @@ Route::group(['middleware' => ['UserNotLoggined']], function(){
     Route::post('ajax/request/getusernotifications', [UserController::class, 'getUserNotifications'])->name('ajax.request.getusernotifications');
     Route::post('ajax/request/removemessage', [UserController::class, 'removeMessage'])->name('ajax.request.removemessage');
     Route::post('ajax/request/notifisseen', [UserController::class, 'notifisSeen'])->name('ajax.request.notifisseen');
+    Route::post('ajax/request/addtocart', [UserController::class, 'addToCart'])->name('ajax.request.addtocart');
 });

@@ -14,6 +14,7 @@ use App\Models\User;
 use App\Models\Product;
 use App\Models\Gallery;
 use App\Models\Notification;
+use App\Models\Cart;
 
 class UserController extends Controller
 {
@@ -297,5 +298,71 @@ class UserController extends Controller
         $user_id = session()->get('user')->id;
         $notif = Notification::where('user_id', $user_id)->paginate(6);
         return view('allNotifications', ['notifics' => $notif]);
+    }
+
+    // Add to cart
+    public function addToCart(Request $req){
+        // Take data
+        $id = $req->product_id;
+        $qty = $req->qty;
+        $user_id = session()->get('user')->id;
+
+        // Check product id
+        $product = Product::find($id);
+        if($product && $product->status == '1' && $product->in_stock > 0){
+            // Check quantity in stock
+            if($qty <= $product->in_stock){
+                $cart = new Cart;
+
+                $cart->user_id = $user_id;
+                $cart->product_id = $id;
+                $cart->qty = $qty;
+    
+                $result = $cart->save();
+                if($result){
+                    return response()->json(['notify_type' => 'success', 'notify_message' => 'This product was successfully added to your cart.', 'data' => '', 'reload' => '']);
+                }else{
+                    return response()->json(['notify_type' => 'danger', 'notify_message' => 'Connection error, please try again later.', 'data' => '', 'reload' => '']);
+                }
+            }else{
+                return response()->json(['notify_type' => 'warning', 'notify_message' => 'Sorry but this product max quantity in stock is '.$product->in_stock, 'data' => '', 'reload' => '']);
+            }
+        }else{
+            return response()->json(['notify_type' => 'danger', 'notify_message' => 'Sorry, but this product is unavailable now.', 'data' => '', 'reload' => '']);
+        }
+    }
+
+    // Get user cart from db
+    public function cart(){
+        $user_id = session()->get('user')->id;
+        $cart = Cart::join('products', 'cart.product_id', '=', 'products.id')
+        ->select('products.*', 'cart.id', 'cart.product_id', 'cart.qty')
+        ->where('cart.status', '1')
+        ->where('cart.user_id', $user_id)
+        ->paginate(12);
+
+        return view('cart', ['cart' => $cart]);
+    }
+
+    // Remove from cart
+    public function removeFromCart($id){
+        $user_id = session()->get('user')->id;
+
+        // Check product id
+        $cart = Cart::find($id);
+        if($cart && $cart->user_id == $user_id){
+            $cart->status = '0';
+            $result = $cart->save();
+            if($result){
+                session()->flash('notify_success', 'You have successfully remove this product from your cart.');
+                return redirect()->back();
+            }else{
+                session()->flash('notify_danger', 'Connection error, please try again later.');
+                return redirect()->back();
+            }
+        }else{
+            session()->flash('notify_danger', 'Sorry, but this product is unavailable now.');
+            return redirect()->back();
+        }
     }
 }

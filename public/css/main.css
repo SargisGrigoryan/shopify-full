@@ -232,7 +232,7 @@ body {
   top: 70px;
   right: 30px;
   left: 30px;
-  z-index: 1;
+  z-index: 100;
 }
 
 .notifications .alert {
@@ -259,6 +259,11 @@ body {
   color: #ebebeb;
 }
 
+.bttn-dark-disabled:hover,
+.bttn-dark-disabled {
+  color: #c0c0c0;
+}
+
 .bttn-light {
   background-color: #ebebeb;
   color: #333333;
@@ -269,11 +274,25 @@ body {
   color: #333333;
 }
 
+.bttn-light-disabled:hover,
+.bttn-light-disabled {
+  color: #c0c0c0;
+}
+
 .bttn-product {
   font-size: 30px;
   color: #8D8D8D;
   background-color: #E6E6E6;
   margin-top: 0;
+}
+
+.bttn-product:hover {
+  color: #8D8D8D;
+}
+
+.bttn-product-disabled:hover,
+.bttn-product-disabled {
+  color: #c0c0c0;
 }
 
 .custom-input {

@@ -38,14 +38,19 @@
                               <li>{{ $option }}</li>
                           @endforeach
                       </ul>
-                      <div>
-                          Quantity - <input type="number" name="qty" class="custom-input">
-                      </div>
                       @if (!session()->has('admin'))
                         <div>
-                          <button type="button" class="bttn bttn-dark">Buy now</button>
-                          <button type="button" class="bttn bttn-dark" data-bs-toggle="tooltip" data-bs-placement="top" title="Add to cart"><i class="fas fa-shopping-basket"></i></button>
-                          <button type="button" class="bttn bttn-dark" data-bs-toggle="tooltip" data-bs-placement="top" title="Add to wishlist"><i class="far fa-heart"></i></button>
+                          @if ($details->in_stock > 0)
+                            <form id="addToCart">
+                              @csrf
+                              <input type="hidden" name="product_id" value="{{ $details->id }}">
+                              <div>Quantity - <input type="number" name="qty" class="custom-input" value="1" min="1" max="{{ $details->in_stock }}"></div>
+                              <button type="submit" class="bttn bttn-dark" data-bs-toggle="tooltip" data-bs-placement="top" title="Add to cart">Add to cart</button>
+                            </form>
+                          @else
+                          <button disabled type="submit" class="bttn bttn-dark bttn-dark-disabled" data-bs-toggle="tooltip" data-bs-placement="top" title="Add to cart">Add to cart</button>
+                          @endif
+                          <div><button type="button" class="bttn bttn-dark" data-bs-toggle="tooltip" data-bs-placement="top" title="Add to wishlist"><i class="far fa-heart"></i></button></div>
                         </div>
                       @else
                         <div><a href="/editProduct/{{ $details->id }}" class="bttn bttn-dark">Edit</a></div>

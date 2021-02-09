@@ -169,7 +169,18 @@
                 <a href="/details/{{ $product->id }}"><img src="{{ $product->img }}" alt="Product image"></a>
                 <ul>
                   <li><button type="button" class="bttn bttn-product"><i class="far fa-heart"></i></button></li>
-                  <li><button type="button" class="bttn bttn-product"><i class="fas fa-shopping-basket"></i></button></li>
+                  <li>
+                    @if ($product->in_stock > 0)
+                      <form id="addToCart">
+                        @csrf
+                        <input type="hidden" name="product_id" value="{{ $product->id }}">
+                        <input type="hidden" name="qty" value="1">
+                        <button type="submit" class="bttn bttn-product"><i class="fas fa-shopping-basket"></i></button>
+                      </form>
+                      @else
+                      <button type="button" disabled class="bttn bttn-product bttn-product-disabled"><i class="fas fa-shopping-basket"></i></button>
+                    @endif
+                  </li>
                   <?php
                     $price_show = "$".$product->price;
                     if($product->discount != 0){

@@ -62,6 +62,39 @@
                 })
             });
 
+            // Add to cart form
+            $('form#addToCart').on('submit', function(e){
+                e.preventDefault();
+
+                var productId = $(this).find('input[name="product_id"]').val();
+                var qty = $(this).find('input[name="qty"]').val();
+
+                $.ajax({
+                    url: "{{ route('ajax.request.addtocart') }}",
+                    type: "POST",
+                    data: {product_id: productId, qty: qty},
+                    success: function(data){
+
+                        // Check if isset message from back end
+                        if(data.notify_type != '' && data.notify_message != ''){
+                            var type = data.notify_type;
+                            var message = data.notify_message;
+                            notify(type, message);
+                        }
+
+                        // Check if isset reload
+                        if(data.reload != ''){
+                            if(data.reload == 'true'){
+                                location.reload();
+                            }else{
+                                window.location.replace("/" + data.reload);
+                            }
+                        }
+                        
+                    }
+                })
+            }); 
+
             // Notifications seen by user
             var myDropdown = $('#dropdown-notifs');
             myDropdown.on('show.bs.dropdown', function () {

@@ -10,6 +10,7 @@ $color_8: #ebebeb;
 $color_9: #646464;
 $color_10: #787878;
 $color_11: #ff5555;
+$color_12: #c0c0c0;
 
 // ___Fonts___
 $font_size_1: 80px;
@@ -222,7 +223,7 @@ body{
     top: 70px;
     right: 30px;
     left: 30px;
-    z-index: 1;
+    z-index: 100;
 }
 .notifications .alert{
     max-width: 500px;
@@ -247,6 +248,10 @@ body{
     background-color: $color_7;
     color: $color_8;
 }
+.bttn-dark-disabled:hover,
+.bttn-dark-disabled{
+    color: $color_12;
+}
 .bttn-light{
     background-color: $color_8;
     color: $color_7;
@@ -255,13 +260,23 @@ body{
     background-color: $color_8;
     color: $color_7;
 }
+.bttn-light-disabled:hover,
+.bttn-light-disabled{
+    color: $color_12;
+}
 .bttn-product{
     font-size: $font_size_7;
     color: $color_5;
     background-color: $color_4;
     margin-top: 0;
 }
-
+.bttn-product:hover{
+    color: $color_5;
+}
+.bttn-product-disabled:hover,
+.bttn-product-disabled{
+    color: $color_12;
+}
 
 // ___Inputs___
 // Main input settings

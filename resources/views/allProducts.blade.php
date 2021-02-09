@@ -44,7 +44,7 @@
                                     <tr>
                                         <th scope="row">{{ $product->id }}</th>
                                         <td><a href="/details/{{ $product->id }}"><img src="{{ $product->img }}" class="img-thumbnail-list" alt="Image"></a></td>
-                                        <td>{{ $product->name }}</td>
+                                        <td>{{ $product->name_en }}</td>
                                         <td>${{ $product->price }}</td>
                                         <td>{{ $product->discount }}%</td>
                                         <td>{{ $product->in_stock }}</td>
