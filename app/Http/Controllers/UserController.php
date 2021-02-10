@@ -264,7 +264,6 @@ class UserController extends Controller
 
     // Get user notifications
     public function getUserNotifications (){
-        // return response()->json(["Im working..."]);
         $user_id = session()->get('user')->id;
         $notifications = Notification::orderByDesc('id')->where('status', '0')->orWhere('status', '1')->where('user_id', $user_id)->get();
         return $notifications;
@@ -301,7 +300,7 @@ class UserController extends Controller
     }
 
     // Add to cart
-    public function addToCart(Request $req){
+    public function addToCart (Request $req){
         // Take data
         $id = $req->product_id;
         $qty = $req->qty;
@@ -333,7 +332,7 @@ class UserController extends Controller
     }
 
     // Get user cart from db
-    public function cart(){
+    public function cart (){
         $user_id = session()->get('user')->id;
         $cart = Cart::join('products', 'cart.product_id', '=', 'products.id')
         ->select('products.*', 'cart.id', 'cart.product_id', 'cart.qty')
@@ -345,7 +344,7 @@ class UserController extends Controller
     }
 
     // Remove from cart
-    public function removeFromCart($id){
+    public function removeFromCart ($id){
         $user_id = session()->get('user')->id;
 
         // Check product id
@@ -364,5 +363,31 @@ class UserController extends Controller
             session()->flash('notify_danger', 'Sorry, but this product is unavailable now.');
             return redirect()->back();
         }
+    }
+
+    // Wishlist
+    public function wishlist (Request $req){
+        $product_id = $req->product_id;
+        
+        // Check product
+        $product = Product::find($product_id);
+        if($product && $product->status == '1'){
+            return response()->json(['notify_type' => '', 'notify_message' => '', 'data' => $product_id, 'reload' => '']);
+        }else{
+            return response()->json(['notify_type' => 'danger', 'notify_message' => 'Sorry, but this product is unavailable now.', 'data' => '', 'reload' => '']);
+        }
+    }
+
+    // Get wishlist
+    public function updateWishlist (Request $req){
+        // Check all products
+        $products_array = [];
+        if($req->wishlist){
+            foreach ($req->wishlist as $id){
+                $product = Product::find($id);
+                array_push($products_array, $product);
+            }
+        }
+        return $products_array;
     }
 }

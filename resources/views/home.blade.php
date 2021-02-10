@@ -112,7 +112,13 @@
                   @endif
                   <a href="/details/{{ $top_product->id }}"><img src="{{ $top_product->img }}" alt="Product image"></a>
                   <ul>
-                    <li><button type="button" class="bttn bttn-product"><i class="far fa-heart"></i></button></li>
+                    <li>
+                      <form id="wishlist">
+                        @csrf
+                        <input type="hidden" name="product_id" value="{{ $top_product->id }}">
+                        <button type="submit" class="bttn bttn-product bttn-wshlist" data-id="{{ $top_product->id }}"><i class="far fa-heart"></i></button>
+                      </form>
+                    </li>
                     <li><button type="button" class="bttn bttn-product"><i class="fas fa-shopping-basket"></i></button></li>
                     <?php
                       $price_show = "$".$top_product->price;
@@ -168,7 +174,13 @@
                 <div class="stock">{{ $product->in_stock!=0?'In stock':'Not in stock' }}</div>
                 <a href="/details/{{ $product->id }}"><img src="{{ $product->img }}" alt="Product image"></a>
                 <ul>
-                  <li><button type="button" class="bttn bttn-product"><i class="far fa-heart"></i></button></li>
+                  <li>
+                    <form id="wishlist">
+                      @csrf
+                      <input type="hidden" name="product_id" value="{{ $product->id }}">
+                      <button type="submit" class="bttn bttn-product bttn-wshlist" data-id="{{ $product->id }}"><i class="far fa-heart"></i></button>
+                    </form>
+                  </li>
                   <li>
                     @if ($product->in_stock > 0)
                       <form id="addToCart">

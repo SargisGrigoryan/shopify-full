@@ -28,6 +28,10 @@ Route::get('/home', [UserController::class, 'getHomePage']);
 Route::get('/details/{id}', [UserController::class, 'getDetails']);
 Route::get('logout', [UserController::class, 'logout']);
 
+// AJAX
+Route::post('ajax/request/wishlist', [UserController::class, 'wishlist'])->name('ajax.request.wishlist');
+Route::post('ajax/request/updatewishlist', [UserController::class, 'updateWishlist'])->name('ajax.request.updatewishlist');
+
 
 // __ADMIN LOGGINED__
 Route::group(['middleware' => ['AdminLoggined']], function(){

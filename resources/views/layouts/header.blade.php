@@ -17,6 +17,12 @@
               </ul>
             </li>
           @endif
+          <li class="nav-item dropdown wishlist-heart" id="dropdown-notifs">
+            <a class="nav-link font_size_9" href="#" id="dropdown01" data-bs-toggle="dropdown" aria-expanded="false"><i class="fas fa-heart"></i></a>
+            <ul class="dropdown-menu dropdown-menu-end" aria-labelledby="dropdown01">
+              <li><div class="color_5 font_size_10 mt-1">No wished products yet.</div></li>
+            </ul>
+          </li>
           <li class="nav-item">
             <a class="nav-link" href="/">Home</a>
           </li>

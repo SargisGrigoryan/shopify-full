@@ -277,6 +277,10 @@ body{
 .bttn-product-disabled{
     color: $color_12;
 }
+// wishlist
+.bttn-wished{
+    color: $color_11;
+}
 
 // ___Inputs___
 // Main input settings
@@ -319,9 +323,12 @@ nav.navbar .nav-item .nav-link{
 nav.navbar .navbar-toggler{
     color: #fff;
 }
+// Notifications bell & Wishlist heart
+nav.navbar .wishlist-heart,
 nav.navbar .notifications-bell{
     position: relative;
 }
+nav.navbar .wishlist-heart .wishist-num,
 nav.navbar .notifications-bell .notifications-num{
     background-color: $color_11;
     color: $color_6;
@@ -336,6 +343,7 @@ nav.navbar .notifications-bell .notifications-num{
     align-items: center;
     font-size: $font_size_13;
 }
+nav.navbar .wishlist-heart .dropdown-menu,
 nav.navbar .notifications-bell .dropdown-menu{
     padding: 10px;
     line-height: 17px;
@@ -343,22 +351,30 @@ nav.navbar .notifications-bell .dropdown-menu{
     max-height: 404px;
     overflow-y: scroll;
 }
+nav.navbar .wishlist-heart .dropdown-menu li:not(:first-child),
 nav.navbar .notifications-bell .dropdown-menu li:not(:first-child){
     border-top: 1px solid $color_8;
     margin-top: 20px;
     padding-top: 10px;
 }
+nav.navbar .wishlist-heart .dropdown-menu li .remove-wished,
+nav.navbar .wishlist-heart .dropdown-menu li b,
 nav.navbar .notifications-bell .dropdown-menu li .remove-notify,
 nav.navbar .notifications-bell .dropdown-menu li b{
     color: $color_9;
 }
+nav.navbar .wishlist-heart .dropdown-menu li .remove-wished,
 nav.navbar .notifications-bell .dropdown-menu li .remove-notify{
     float: right;
     font-size: $font_size_13;
     background: none;
     border: none;
 }
-
+// Wishlist
+nav.navbar .wishlist-heart .dropdown-menu li .wishlist-image{
+    max-width: 80px;
+    margin-right: 10px;
+}
 
 // ___Sections___
 

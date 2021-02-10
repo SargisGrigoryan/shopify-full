@@ -295,6 +295,10 @@ body {
   color: #c0c0c0;
 }
 
+.bttn-wished {
+  color: #ff5555;
+}
+
 .custom-input {
   border: 2px solid #646464;
 }
@@ -341,10 +345,12 @@ nav.navbar .navbar-toggler {
   color: #fff;
 }
 
+nav.navbar .wishlist-heart,
 nav.navbar .notifications-bell {
   position: relative;
 }
 
+nav.navbar .wishlist-heart .wishist-num,
 nav.navbar .notifications-bell .notifications-num {
   background-color: #ff5555;
   color: #FFFFFF;
@@ -366,6 +372,7 @@ nav.navbar .notifications-bell .notifications-num {
   font-size: 11px;
 }
 
+nav.navbar .wishlist-heart .dropdown-menu,
 nav.navbar .notifications-bell .dropdown-menu {
   padding: 10px;
   line-height: 17px;
@@ -374,22 +381,31 @@ nav.navbar .notifications-bell .dropdown-menu {
   overflow-y: scroll;
 }
 
+nav.navbar .wishlist-heart .dropdown-menu li:not(:first-child),
 nav.navbar .notifications-bell .dropdown-menu li:not(:first-child) {
   border-top: 1px solid #ebebeb;
   margin-top: 20px;
   padding-top: 10px;
 }
 
+nav.navbar .wishlist-heart .dropdown-menu li .remove-wished,
+nav.navbar .wishlist-heart .dropdown-menu li b,
 nav.navbar .notifications-bell .dropdown-menu li .remove-notify,
 nav.navbar .notifications-bell .dropdown-menu li b {
   color: #646464;
 }
 
+nav.navbar .wishlist-heart .dropdown-menu li .remove-wished,
 nav.navbar .notifications-bell .dropdown-menu li .remove-notify {
   float: right;
   font-size: 11px;
   background: none;
   border: none;
+}
+
+nav.navbar .wishlist-heart .dropdown-menu li .wishlist-image {
+  max-width: 80px;
+  margin-right: 10px;
 }
 
 section#slider {
