@@ -50,6 +50,7 @@
                 <ul class="dropdown-menu" aria-labelledby="dropdown01">
                   <li><a class="dropdown-item" href="/addProduct">Add product</a></li>
                   <li><a class="dropdown-item" href="/allProducts">All products (0)</a></li>
+                  <li><a class="dropdown-item" href="/categories">Categories (0)</a></li>
                 </ul>
               </li>
             @endif

@@ -10,7 +10,7 @@
             <div class="container">
                 <div class="row">
                     <div class="col-12 text-center">
-                        <div class="font_size_3">All product</div>
+                        <div class="font_size_3">All products</div>
                     </div>
                 </div>
             </div>

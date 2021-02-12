@@ -15,6 +15,7 @@ use App\Models\Product;
 use App\Models\Gallery;
 use App\Models\Notification;
 use App\Models\Cart;
+use App\Models\Category;
 
 class UserController extends Controller
 {
@@ -245,9 +246,10 @@ class UserController extends Controller
     function getDetails ($id){
         $product = Product::where('status', '1')->find($id);
         $gallery = Gallery::where('product_id', $id)->get();
+        $cat = Category::find($product->cat_id);
 
         if($product){
-            return view('details', ['details' => $product, 'gallery' => $gallery]);
+            return view('details', ['details' => $product, 'gallery' => $gallery, 'cat' => $cat]);
         }else{
             session()->flash('notify_danger', 'Sorry but this product is not available now.');
             return redirect()->back();

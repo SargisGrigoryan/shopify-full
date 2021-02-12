@@ -45,19 +45,23 @@ Route::group(['middleware' => ['AdminLoggined']], function(){
 
 // __ADMIN NOT LOGGINED__
 Route::group(['middleware' => ['AdminNotLoggined']], function(){
-   // VIEW
-    Route::view('addProduct', 'addProduct');
+    // VIEW
 
     // POST
     Route::post('addProduct', [AdminController::class, 'addProduct']);
     Route::post('saveProduct', [AdminController::class, 'saveProduct']);
+    Route::post('addCat', [AdminController::class, 'addCat']);
 
     // GET
+    Route::get('addProduct', [AdminController::class, 'addProductPage']);
     Route::get('editProduct/{id}', [AdminController::class, 'editProduct']);
     Route::get('allProducts', [AdminController::class, 'allProducts']);
     Route::get('/blockProduct/{id}', [AdminController::class, 'blockProduct']);
     Route::get('/recoverProduct/{id}', [AdminController::class, 'recoverProduct']);
     Route::get('/removeProduct/{id}', [AdminController::class, 'removeProduct']);
+    Route::get('/categories', [AdminController::class, 'getCats']);
+    Route::get('/blockCat/{id}', [AdminController::class, 'blockCat']);
+    Route::get('/recoverCat/{id}', [AdminController::class, 'recoverCat']);
 });
 
 

@@ -12,9 +12,17 @@ use Hash;
 use App\Models\Product;
 use App\Models\Gallery;
 use App\Models\Admin;
+use App\Models\Category;
 
 class AdminController extends Controller
 {
+    // Add product page
+    function addProductPage (){
+        $cats = Category::where('status', '1')->get();
+
+        return view('addProduct', ['cats' => $cats]);
+    }
+
     // Add product
     function addProduct (Request $req){
         $product = new Product;
@@ -33,6 +41,7 @@ class AdminController extends Controller
         $product->price = $req->price;
         $product->discount = $req->discount;
         $product->in_stock = $req->in_stock;
+        $product->cat_id = $req->cat_id;
         $product->options_en = $req->options_en;
         $product->options_ru = $req->options_ru;
         $product->slider = $req->slider;
@@ -107,8 +116,9 @@ class AdminController extends Controller
     function editProduct ($id){
         $product = Product::find($id);
         $gallery = Gallery::where('product_id', $id)->get();
+        $cats = Category::where('status', '1')->get();
 
-        return view('editProduct', ['data' => $product, 'gallery' => $gallery]);
+        return view('editProduct', ['data' => $product, 'gallery' => $gallery, 'cats' => $cats]);
     }
 
     // Save product
@@ -344,6 +354,73 @@ class AdminController extends Controller
                 $file_remove = Gallery::find($file->id)->delete();
             }
             session()->flash('notify_success', 'Product was successfully removed.');
+            return redirect()->back();
+        }else{
+            session()->flash('notify_danger', 'Connection error, please try again later.');
+            return redirect()->back();
+        }
+    }
+
+    // Get categories from db
+    function getCats (){
+        $cats = Category::paginate(12);
+        $used_cats = Product::select('cat_id')->get();
+
+        return view('cats', ['cats' => $cats, 'used_cats' => $used_cats]);
+    }
+
+    // Add new category
+    function addCat (Request $req){
+        $cat = new Category;
+
+        $cat->name_en = $req->name_en;
+        $cat->name_ru = $req->name_ru;
+
+        $result = $cat->save();
+
+        if($result){
+            session()->flash('notify_success', 'You have successfully added a new category.');
+            return redirect()->back();
+        }else{
+            session()->flash('notify_danger', 'Connection error, please try again later.');
+            return redirect()->back();
+        }
+    }
+
+    // Block cat
+    function blockCat ($id){
+        $cat = Category::find($id);
+
+        // Check if cat is not in used
+        $cat_used = Product::where('cat_id', $id)->get();
+
+        if(count($cat_used) < 1){
+            $cat->status = '0';
+
+            $result = $cat->save();
+    
+            if($result){
+                session()->flash('notify_success', 'You have successfully blocked this category.');
+                return redirect()->back();
+            }else{
+                session()->flash('notify_danger', 'Connection error, please try again later.');
+                return redirect()->back();
+            }
+        }else{
+            session()->flash('notify_warning', 'Sorry but this category is in used, you cannot block now.');
+            return redirect()->back();
+        }
+    }
+
+    // Recover cat
+    function recoverCat ($id){
+        $cat = Category::find($id);
+        $cat->status = '1';
+
+        $result = $cat->save();
+
+        if($result){
+            session()->flash('notify_success', 'You have successfully recovered this category.');
             return redirect()->back();
         }else{
             session()->flash('notify_danger', 'Connection error, please try again later.');

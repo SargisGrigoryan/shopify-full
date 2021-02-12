@@ -86,6 +86,14 @@
                               <input type="number" class="form-control" id="Input6" name="in_stock" min="0" placeholder="In tock" value="{{ $data->in_stock }}">
                             </div>
                             <div class="mb-3">
+                              <label for="Select1" class="form-label">Product Category</label>
+                              <select class="form-select" aria-label="Default select example" id="Select1" name="cat_id">
+                                @foreach ($cats as $cat)
+                                  <option value="{{ $cat->id }}" {{ $data->cat_id==$cat->id?'selected':'' }}>{{ $cat->name_en }}</option>
+                                @endforeach
+                              </select>
+                            </div>
+                            <div class="mb-3">
                               <label for="Input7" class="form-label">Options EN</label>
                               <input type="text" class="form-control" id="Input7" name="options_en" min="0" placeholder="Brand - Nike, Color - white, etc..." value="{{ $data->options_en }}">
                             </div>

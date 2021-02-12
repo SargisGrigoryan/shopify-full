@@ -30,6 +30,7 @@
                       ?>
                       <div class="font_size_7"><?=$price_show?></div>
                       <div class="font_size_11">{{ $details->descr_en }}</div>
+                      <div class="font_size_9 mt-2"><i>Category - {{ $cat->name_en }}</i></div>
                       <ul>
                           <?php
                             $options_array = explode(", ", $details->options_en);
