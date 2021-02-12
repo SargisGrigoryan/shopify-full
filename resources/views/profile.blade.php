@@ -17,9 +17,8 @@
                     <div class="font_size_10 mt-2"><i class="fas fa-shopping-cart"></i> Happy customer - 65</div>
                     <div class="font_size_10 mt-2"><i class="fas fa-money-check-alt"></i> Spent money - $4800</div>
                     <ul>
-                        <li><a href="/cart">Cart (4)</a></li>
+                        <li><a href="/cart">Cart ({{ $cart_count }})</a></li>
                         <li><a href="#">Orders (3)</a></li>
-                        <li><a href="#">Wishlist (5)</a></li>
                     </ul>
                     <a href="/userSettings" class="bttn bttn-dark">Settings</a>
                 </div>

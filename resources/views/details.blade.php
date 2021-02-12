@@ -58,6 +58,7 @@
                         </div>
                       @else
                         <div><a href="/editProduct/{{ $details->id }}" class="bttn bttn-dark">Edit</a></div>
+                        <div><a href="/removeProduct/{{ $details->id }}" class="bttn bttn-dark">Remove</a></div>
                       @endif
                   </div>
               </div>

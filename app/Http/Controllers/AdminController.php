@@ -251,8 +251,11 @@ class AdminController extends Controller
     function adminLogin (Request $req){
         $admin = Admin::where('email', $req->email)->first();
         if($admin && Hash::check($req->password, $admin->password)){
-            // Remove all user sessions
+            // Remove user sessions
             session()->pull('user');
+
+            // Remove user cookies
+            cookie()->queue('remember_user', '', -30000);
 
             // Put session
             session()->put('admin', $admin);

@@ -23,8 +23,11 @@ class UserController extends Controller
         // Find account
         $user = User::where('email', $req->email)->first();
         if($user && Hash::check($req->password, $user->password)){
-            // Remove all admin sessions
+            // Remove admin sessions
             session()->pull('admin');
+            
+            // Remove admin cookies
+            cookie()->queue('remember_admin', '', -30000);
             
             // Put sessions
             session()->put('user', $user);
@@ -71,9 +74,11 @@ class UserController extends Controller
 
     // Get user profile
     function profile (){
-        $user = User::find(session::get('user')->id);
+        $user_id = session::get('user')->id;
+        $user = User::find($user_id);
+        $cart_count = Cart::where('user_id', $user_id)->where('status', '1')->count();
 
-        return view('profile', ['userData' => $user]);
+        return view('profile', ['userData' => $user, 'cart_count' => $cart_count]);
     }
 
     // Register new user
@@ -385,7 +390,9 @@ class UserController extends Controller
         if($req->wishlist){
             foreach ($req->wishlist as $id){
                 $product = Product::find($id);
-                array_push($products_array, $product);
+                if($product && $product->status == '1'){
+                    array_push($products_array, $product);
+                }
             }
         }
         return $products_array;

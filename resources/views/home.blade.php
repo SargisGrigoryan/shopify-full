@@ -112,14 +112,19 @@
                   @endif
                   <a href="/details/{{ $top_product->id }}"><img src="{{ $top_product->img }}" alt="Product image"></a>
                   <ul>
-                    <li>
-                      <form id="wishlist">
-                        @csrf
-                        <input type="hidden" name="product_id" value="{{ $top_product->id }}">
-                        <button type="submit" class="bttn bttn-product bttn-wshlist" data-id="{{ $top_product->id }}"><i class="far fa-heart"></i></button>
-                      </form>
-                    </li>
-                    <li><button type="button" class="bttn bttn-product"><i class="fas fa-shopping-basket"></i></button></li>
+                    @if (session()->has('admin'))
+                      <li><a href="/editProduct/{{ $top_product->id }}" class="bttn bttn-product"><i class="fas fa-pencil-alt"></i></a></li>
+                      <li><a href="/removeProduct/{{ $top_product->id }}" class="bttn bttn-product"><i class="fas fa-trash"></i></a></li>
+                    @else
+                      <li>
+                        <form id="wishlist">
+                          @csrf
+                          <input type="hidden" name="product_id" value="{{ $top_product->id }}">
+                          <button type="submit" class="bttn bttn-product bttn-wshlist" data-id="{{ $top_product->id }}"><i class="far fa-heart"></i></button>
+                        </form>
+                      </li>
+                      <li><button type="button" class="bttn bttn-product"><i class="fas fa-shopping-basket"></i></button></li>
+                    @endif
                     <?php
                       $price_show = "$".$top_product->price;
                       if($top_product->discount != 0){
@@ -174,25 +179,30 @@
                 <div class="stock">{{ $product->in_stock!=0?'In stock':'Not in stock' }}</div>
                 <a href="/details/{{ $product->id }}"><img src="{{ $product->img }}" alt="Product image"></a>
                 <ul>
-                  <li>
-                    <form id="wishlist">
-                      @csrf
-                      <input type="hidden" name="product_id" value="{{ $product->id }}">
-                      <button type="submit" class="bttn bttn-product bttn-wshlist" data-id="{{ $product->id }}"><i class="far fa-heart"></i></button>
-                    </form>
-                  </li>
-                  <li>
-                    @if ($product->in_stock > 0)
-                      <form id="addToCart">
+                  @if (session()->has('admin'))
+                    <li><a href="/editProduct/{{ $product->id }}" class="bttn bttn-product"><i class="fas fa-pencil-alt"></i></a></li>
+                    <li><a href="/removeProduct/{{ $product->id }}" class="bttn bttn-product"><i class="fas fa-trash"></i></a></li>
+                  @else
+                    <li>
+                      <form id="wishlist">
                         @csrf
                         <input type="hidden" name="product_id" value="{{ $product->id }}">
-                        <input type="hidden" name="qty" value="1">
-                        <button type="submit" class="bttn bttn-product"><i class="fas fa-shopping-basket"></i></button>
+                        <button type="submit" class="bttn bttn-product bttn-wshlist" data-id="{{ $product->id }}"><i class="far fa-heart"></i></button>
                       </form>
-                      @else
-                      <button type="button" disabled class="bttn bttn-product bttn-product-disabled"><i class="fas fa-shopping-basket"></i></button>
-                    @endif
-                  </li>
+                    </li>
+                    <li>
+                      @if ($product->in_stock > 0)
+                        <form id="addToCart">
+                          @csrf
+                          <input type="hidden" name="product_id" value="{{ $product->id }}">
+                          <input type="hidden" name="qty" value="1">
+                          <button type="submit" class="bttn bttn-product"><i class="fas fa-shopping-basket"></i></button>
+                        </form>
+                        @else
+                        <button type="button" disabled class="bttn bttn-product bttn-product-disabled"><i class="fas fa-shopping-basket"></i></button>
+                      @endif
+                    </li>
+                  @endif
                   <?php
                     $price_show = "$".$product->price;
                     if($product->discount != 0){

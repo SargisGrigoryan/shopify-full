@@ -583,6 +583,7 @@ footer ul li a {
 }
 
 @media (max-width: 576px) {
+  nav.navbar .wishlist-heart,
   nav.navbar .notifications-bell {
     padding: 0 5px;
   }
@@ -602,6 +603,7 @@ footer ul li a {
 }
 
 @media (min-width: 576px) {
+  nav.navbar .wishlist-heart,
   nav.navbar .notifications-bell {
     padding: 0 5px;
   }
@@ -621,6 +623,7 @@ footer ul li a {
 }
 
 @media (min-width: 768px) {
+  nav.navbar .wishlist-heart,
   nav.navbar .notifications-bell {
     padding: 0;
   }

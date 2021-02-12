@@ -13,19 +13,22 @@
 {{-- Custom js --}}
 <script src="/js/main.js"></script>
 
-{{-- Custome js with blade --}}
-@if (session()->get('user'))
+{{-- Custom js with blade --}}
+<script>
+    $(function(){
+        // Setup ajax csrf
+        $.ajaxSetup({
+            headers: {
+                'X-CSRF-TOKEN': $('meta[name="csrf-token"]').attr('content')
+            }
+        });
+    })
+</script>
+
+{{-- Custom js when user is loggined --}}
+@if (session()->has('user'))
     <script>
         $(function(){
-            // Setup ajax csrf
-            $.ajaxSetup({
-                headers: {
-                    'X-CSRF-TOKEN': $('meta[name="csrf-token"]').attr('content')
-                }
-            });
-
-            // Call functions
-            updateWishlist();
 
             // Get user messages with ajax
             setInterval(function(){
@@ -96,7 +99,24 @@
                         
                     }
                 })
-            }); 
+            });
+
+            // Notifications seen by user
+            var myDropdown = $('#dropdown-notifs');
+            myDropdown.on('show.bs.dropdown', function () {
+                $.post("{{ route('ajax.request.notifisseen') }}");
+            })
+        })
+    </script>
+@endif
+
+{{-- Custom js when admin is not loggined --}}
+@if (!session()->has('admin'))
+    <script>
+        $(function(){
+
+            // Call functions
+            updateWishlist();
 
             // Wishlist
             $('form#wishlist').on('submit', function(e){
@@ -168,13 +188,7 @@
                         
                     }
                 })
-            }); 
-
-            // Notifications seen by user
-            var myDropdown = $('#dropdown-notifs');
-            myDropdown.on('show.bs.dropdown', function () {
-                $.post("{{ route('ajax.request.notifisseen') }}");
-            })
+            });
 
             // Remove from wishlist
             $('body').on('click', '.remove-wished', function(){
