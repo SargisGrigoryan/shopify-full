@@ -175,6 +175,36 @@
             myDropdown.on('show.bs.dropdown', function () {
                 $.post("{{ route('ajax.request.notifisseen') }}");
             })
+
+            // Remove from wishlist
+            $('body').on('click', '.remove-wished', function(){
+                
+                var productId = $(this).data('id').toString();
+
+                // Get wishlist from local storage
+                var wishlist = window.localStorage.getItem('wishlist');
+
+
+                if(wishlist != null){
+                    // Find id in wishlist
+                    productsArray = JSON.parse(wishlist);
+                    productsObj = productId;
+                    
+                    // Check if product is added, remove that
+                    if($.inArray(productId, productsArray) != -1){
+                        productsArray.splice(productsArray.indexOf(productId), 1);
+
+                        window.localStorage.removeItem('wishlist');
+                        window.localStorage.setItem('wishlist', JSON.stringify(productsArray));
+
+                        // Response user
+                        notify('success', 'Product was successfully removed from wishlist.');
+                    }
+                }
+
+                // After removing product from wishlist, update wishlist
+                updateWishlist();
+            });
         })
 
         // Update wishlist function
@@ -199,7 +229,7 @@
                     }else{
                         var counter = 0;
                         for(i = 0; i < data.length; i++){
-                            products += '<li><img src="' + data[i]['img'] + '" alt="Image" class="wishlist-image"><b>' + data[i]['name_en'] + '</b><button type="button" class="remove-wished" data-id="' + data[i]['id'] + '"><i class="fas fa-trash"></i></button></li>';
+                            products += '<li><img src="' + data[i]['img'] + '" alt="Image" class="wishlist-image"><a href="/details/' + data[i]['id'] + '"><b>' + data[i]['name_en'] + '</b></a><button type="button" class="remove-wished" data-id="' + data[i]['id'] + '"><i class="fas fa-trash"></i></button></li>';
                             counter++;
                         }
                         if(counter != 0){
@@ -229,36 +259,6 @@
                 $('.bttn-wshlist[data-id="' + wishlist[i] + '"]').html('<i class="fas fa-heart"></i>');
             }
         }
-
-        // Remove from wishlist
-        $('body').on('click', '.remove-wished', function(){
-            
-            var productId = $(this).data('id').toString();
-
-            // Get wishlist from local storage
-            var wishlist = window.localStorage.getItem('wishlist');
-
-
-            if(wishlist != null){
-                // Find id in wishlist
-                productsArray = JSON.parse(wishlist);
-                productsObj = productId;
-                
-                // Check if product is added, remove that
-                if($.inArray(productId, productsArray) != -1){
-                    productsArray.splice(productsArray.indexOf(productId), 1);
-
-                    window.localStorage.removeItem('wishlist');
-                    window.localStorage.setItem('wishlist', JSON.stringify(productsArray));
-
-                    // Response user
-                    notify('success', 'Product was successfully removed from wishlist.');
-                }
-            }
-
-            // After removing product from wishlist, update wishlist
-            updateWishlist();
-        });
 
     </script>
 @endif

@@ -408,6 +408,10 @@ nav.navbar .wishlist-heart .dropdown-menu li .wishlist-image {
   margin-right: 10px;
 }
 
+nav.navbar .wishlist-heart .dropdown-menu a {
+  text-decoration: none;
+}
+
 section#slider {
   background-color: #333333;
   color: #ebebeb;

@@ -50,7 +50,11 @@
                           @else
                           <button disabled type="submit" class="bttn bttn-dark bttn-dark-disabled" data-bs-toggle="tooltip" data-bs-placement="top" title="Add to cart">Add to cart</button>
                           @endif
-                          <div><button type="button" class="bttn bttn-dark" data-bs-toggle="tooltip" data-bs-placement="top" title="Add to wishlist"><i class="far fa-heart"></i></button></div>
+                          <form id="wishlist">
+                            @csrf
+                            <input type="hidden" name="product_id" value="{{ $details->id }}">
+                            <button type="submit" class="bttn bttn-dark bttn-wshlist" data-id="{{ $details->id }}"><i class="far fa-heart"></i></button>
+                          </form>
                         </div>
                       @else
                         <div><a href="/editProduct/{{ $details->id }}" class="bttn bttn-dark">Edit</a></div>
