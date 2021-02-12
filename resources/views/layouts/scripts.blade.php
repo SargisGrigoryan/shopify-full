@@ -218,7 +218,6 @@
 
         // Update all wishlist buttons
         function wihlistButtonUpdate () {
-            console.log('I worked');
             // Get products ids from local storage
             var wishlist = JSON.parse(window.localStorage.getItem('wishlist'));
             // Reset all wished buttons
@@ -230,6 +229,36 @@
                 $('.bttn-wshlist[data-id="' + wishlist[i] + '"]').html('<i class="fas fa-heart"></i>');
             }
         }
+
+        // Remove from wishlist
+        $('body').on('click', '.remove-wished', function(){
+            
+            var productId = $(this).data('id').toString();
+
+            // Get wishlist from local storage
+            var wishlist = window.localStorage.getItem('wishlist');
+
+
+            if(wishlist != null){
+                // Find id in wishlist
+                productsArray = JSON.parse(wishlist);
+                productsObj = productId;
+                
+                // Check if product is added, remove that
+                if($.inArray(productId, productsArray) != -1){
+                    productsArray.splice(productsArray.indexOf(productId), 1);
+
+                    window.localStorage.removeItem('wishlist');
+                    window.localStorage.setItem('wishlist', JSON.stringify(productsArray));
+
+                    // Response user
+                    notify('success', 'Product was successfully removed from wishlist.');
+                }
+            }
+
+            // After removing product from wishlist, update wishlist
+            updateWishlist();
+        });
 
     </script>
 @endif
